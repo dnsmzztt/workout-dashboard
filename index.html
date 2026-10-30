@@ -2,788 +2,653 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Winter Arc">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>Winter Arc 26/27</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#06080f;
-    --glass:rgba(255,255,255,0.07);
-    --glass-border:rgba(255,255,255,0.13);
-    --glass-shine:rgba(255,255,255,0.17);
-    --text:#f0f2f8;
-    --muted:rgba(190,205,230,0.5);
-    --ice:#6fd6ff;
-    --orange:#ff8c42;
-    --green:#4ade80;
-    --red:#ff6b6b;
-    --blue:#60a5fa;
-    --yellow:#fbbf24;
-    --purple:#c084fc;
-    --protein:#60a5fa;
-    --carbs:#fb923c;
-    --fat:#4ade80;
-    --blur:blur(28px) saturate(180%);
+    color-scheme:light dark;
+    --bg:#f2f2f7; --card:#fff; --fill:rgba(118,118,128,.12); --thumb:#fff;
+    --sep:rgba(60,60,67,.18);
+    --label:#000; --label2:rgba(60,60,67,.62); --label3:rgba(60,60,67,.32);
+    --accent:#0a7bc2; --on:#28a745; --off:#e8820c;
+    --p:#3478f6; --c:#f5a524; --g:#2bbf8a;
+    --bar:rgba(249,249,251,.72);
+    --round:ui-rounded,-apple-system,BlinkMacSystemFont,"SF Pro Rounded",system-ui,sans-serif;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#000; --card:#1c1c1e; --fill:rgba(118,118,128,.24); --thumb:#636366;
+      --sep:rgba(84,84,88,.5);
+      --label:#fff; --label2:rgba(235,235,245,.6); --label3:rgba(235,235,245,.28);
+      --accent:#64d2ff; --on:#30d158; --off:#ff9f0a;
+      --p:#5e9eff; --c:#ffb340; --g:#4fd8a6;
+      --bar:rgba(30,30,32,.7);
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
   body{
-    background:var(--bg);color:var(--text);
-    font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;
-    min-height:100vh;overflow-x:hidden;
+    background:var(--bg);color:var(--label);
+    font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",sans-serif;
+    letter-spacing:-.01em;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
   }
-  body::before{
-    content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(ellipse 90% 55% at 15% 5%, rgba(80,190,255,0.13) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 50% at 85% 18%, rgba(96,120,250,0.10) 0%, transparent 65%),
-      radial-gradient(ellipse 70% 55% at 50% 88%, rgba(74,222,170,0.08) 0%, transparent 65%),
-      radial-gradient(ellipse 55% 40% at 92% 72%, rgba(192,132,252,0.08) 0%, transparent 65%);
-  }
-  body>*{position:relative;z-index:1;}
+  b{font-weight:600;}
+  .num{font-variant-numeric:tabular-nums;}
+  .mut{color:var(--label2);}
 
-  /* HEADER */
-  .header{padding:56px 40px 30px;}
-  .header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--ice);text-transform:uppercase;margin-bottom:10px;opacity:.85;}
-  .header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,92px);letter-spacing:.04em;line-height:1;text-shadow:0 0 90px rgba(111,214,255,.28);}
-  .header h1 span{color:var(--ice);}
-  .header-sub{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:.18em;margin-top:7px;text-transform:uppercase;}
-  .stats-row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
-  .stat{background:rgba(255,255,255,0.06);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:11px 22px;display:flex;flex-direction:column;gap:3px;box-shadow:inset 0 1px 0 var(--glass-shine),0 4px 18px rgba(0,0,0,.35);transition:background .2s;}
-  .stat:hover{background:rgba(255,255,255,.10);}
-  .stat-label{font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;}
-  .stat-value{font-family:'DM Mono',monospace;font-size:19px;font-weight:500;color:var(--ice);}
-  .stat.alt .stat-value{color:var(--green);}
-  .stat.alt2 .stat-value{color:var(--blue);}
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px calc(110px + env(safe-area-inset-bottom));}
+  .eyebrow{font-size:13px;font-weight:600;color:var(--label2);text-transform:uppercase;letter-spacing:.04em;padding-top:18px;}
+  h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin:2px 0 16px;}
+  h2{font-size:20px;font-weight:700;letter-spacing:-.02em;margin:30px 4px 10px;}
+  .foot{font-size:13px;color:var(--label2);margin:10px 4px 0;line-height:1.45;}
+  .foot b{color:var(--label);}
 
-  /* maintenance strip */
-  .energy-strip{display:flex;flex-wrap:wrap;gap:0;margin:24px 40px 0;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;box-shadow:0 4px 22px rgba(0,0,0,.3),inset 0 1px 0 var(--glass-shine);}
-  .energy-cell{flex:1 1 130px;padding:14px 18px;border-right:1px solid rgba(255,255,255,.06);}
-  .energy-cell:last-child{border-right:none;}
-  .energy-cell .ec-label{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-  .energy-cell .ec-val{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;}
-  .energy-cell .ec-val small{font-size:11px;color:var(--muted);}
-  .ec-arrow{display:flex;align-items:center;color:var(--muted);font-size:18px;flex:0 0 auto;padding:0 4px;}
+  .view{display:none;}
+  .view.active{display:block;}
 
-  /* ROADMAP */
-  .rm-caption{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:18px 40px 0;}
-  .roadmap{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:8px 40px 0;}
-  .rm-cell{background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:10px 6px;text-align:center;box-shadow:inset 0 1px 0 var(--glass-shine);transition:transform .15s;}
-  .rm-cell:hover{transform:translateY(-1px);}
-  .rm-month{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-  .rm-kg{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--text);}
-  .rm-cell.start{border-color:rgba(111,214,255,.4);}
-  .rm-cell.start .rm-kg{color:var(--ice);}
-  .rm-cell.goal{border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.07);}
-  .rm-cell.goal .rm-kg{color:var(--green);}
+  /* cards & lists */
+  .card{background:var(--card);border-radius:22px;overflow:hidden;}
+  .card+.card{margin-top:12px;}
+  .pad{padding:16px;}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;min-height:48px;position:relative;}
+  .row+.row::before,.row+details::before,details+.row::before,details+details::before{content:'';position:absolute;top:0;left:16px;right:0;border-top:.5px solid var(--sep);}
+  .row .r,summary .r{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .row .sub,summary .sub{display:block;font-size:13px;color:var(--label2);margin-top:1px;}
+  .row.stack{display:block;}
+  .row.stack p{font-size:14px;color:var(--label2);margin-top:3px;line-height:1.45;}
+  .row.stack p b{color:var(--label);}
 
-  /* TABS */
-  .tabs-wrapper{padding:14px 40px;position:sticky;top:0;z-index:100;background:linear-gradient(to bottom,rgba(6,8,15,.94),rgba(6,8,15,.74));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);margin-top:24px;}
-  .tabs{display:inline-flex;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:5px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 20px rgba(0,0,0,.4);}
-  .tab{padding:9px 22px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:500;transition:all .2s;user-select:none;border-radius:12px;white-space:nowrap;border:1px solid transparent;}
-  .tab:hover{color:var(--text);background:rgba(255,255,255,.06);}
-  .tab.active{color:var(--text);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.15);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 2px 10px rgba(0,0,0,.35);}
+  /* disclosures */
+  details{position:relative;}
+  summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;min-height:48px;}
+  summary::-webkit-details-marker{display:none;}
+  summary>span:first-child{flex:1;min-width:0;}
+  summary::after{content:'';flex:none;width:8px;height:8px;border-right:2px solid var(--label3);border-bottom:2px solid var(--label3);transform:rotate(-45deg);transition:transform .2s;margin-right:4px;}
+  details[open]>summary::after{transform:rotate(45deg);}
+  .dbody{padding:0 16px 14px;font-size:14px;line-height:1.5;color:var(--label2);}
+  .dbody b{color:var(--label);}
+  .dbody i{font-style:normal;color:var(--label3);}
+  .dbody p+p{margin-top:8px;}
+  .dbody ul{list-style:none;}
+  .dbody li{padding-left:14px;position:relative;margin-top:4px;}
+  .dbody li::before{content:'';position:absolute;left:2px;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--label3);}
 
-  .main{padding:28px 40px 64px;max-width:1180px;}
-  .section{display:none;animation:fade .35s ease;}
-  .section.active{display:block;}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  /* segmented */
+  .sticky{position:sticky;top:env(safe-area-inset-top);z-index:20;margin:0 -16px;padding:8px 16px 10px;background:var(--bg);}
+  .seg{--n:2;--i:0;position:relative;display:flex;background:var(--fill);border-radius:100px;padding:3px;}
+  .seg::before{content:'';position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/var(--n));border-radius:100px;background:var(--thumb);box-shadow:0 2px 8px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04);transform:translateX(calc(var(--i)*100%));transition:transform .28s cubic-bezier(.3,.7,.2,1);}
+  .seg button{flex:1;position:relative;z-index:1;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--label);padding:7px 2px;cursor:pointer;white-space:nowrap;letter-spacing:-.01em;}
+  .seg button:not(.on){color:var(--label2);}
+  .seg.sm button{font-size:13px;padding:5px 2px;}
 
-  .section-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;margin-bottom:5px;margin-top:34px;}
-  .section-title:first-child{margin-top:0;}
-  .section-sub{color:var(--muted);font-size:12px;margin-bottom:20px;letter-spacing:.03em;}
+  /* hero */
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;}
+  .big{font-family:var(--round);font-size:44px;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
+  .big small{font-size:20px;font-weight:600;color:var(--label2);letter-spacing:-.01em;}
+  .kicker{font-size:13px;color:var(--label2);font-weight:500;margin-bottom:6px;}
+  .chart{display:block;width:100%;height:auto;margin-top:14px;overflow:visible;}
+  .chart text{font:500 10px -apple-system,system-ui,sans-serif;fill:var(--label2);}
+  .chips{display:grid;grid-template-columns:repeat(4,1fr);border-top:.5px solid var(--sep);}
+  .chips div{padding:12px 4px;text-align:center;}
+  .chips div+div{border-left:.5px solid var(--sep);}
+  .chips span{display:block;font-size:11px;color:var(--label2);text-transform:uppercase;letter-spacing:.03em;}
+  .chips b{font-family:var(--round);font-size:17px;font-variant-numeric:tabular-nums;}
 
-  /* MACRO BANNER */
-  .macro-banner{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
-  .macro-card{backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:22px;padding:22px 26px;position:relative;overflow:hidden;transition:transform .2s;box-shadow:0 8px 36px rgba(0,0,0,.35),inset 0 1px 0 var(--glass-shine);}
-  .macro-card:hover{transform:translateY(-2px);}
-  .macro-card.on{background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.25);}
-  .macro-card.off{background:rgba(255,140,66,.05);border:1px solid rgba(255,140,66,.25);}
-  .macro-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:22px 22px 0 0;}
-  .macro-card.on::before{background:linear-gradient(90deg,var(--green),transparent);}
-  .macro-card.off::before{background:linear-gradient(90deg,var(--orange),transparent);}
-  .macro-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.07em;margin-bottom:2px;}
-  .macro-card-meta{font-size:10px;color:var(--muted);letter-spacing:.05em;margin-bottom:12px;}
-  .macro-card.on .macro-card-title{color:var(--green);}
-  .macro-card.off .macro-card-title{color:var(--orange);}
-  .macro-card-kcal{font-family:'DM Mono',monospace;font-size:34px;font-weight:500;line-height:1;margin-bottom:16px;}
-  .macro-pills{display:flex;gap:8px;flex-wrap:wrap;}
-  .pill{border-radius:30px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;backdrop-filter:blur(8px);}
-  .pill.p{color:var(--protein);border:1px solid rgba(96,165,250,.22);background:rgba(96,165,250,.09);}
-  .pill.c{color:var(--carbs);border:1px solid rgba(251,146,60,.22);background:rgba(251,146,60,.09);}
-  .pill.g{color:var(--fat);border:1px solid rgba(74,222,128,.22);background:rgba(74,222,128,.09);}
+  /* day summary */
+  .day-sum{display:flex;align-items:center;gap:18px;}
+  .day-sum .big{color:var(--tone);}
+  .macros{flex:1;display:grid;gap:7px;}
+  .mrow{display:grid;grid-template-columns:16px 1fr 44px;align-items:center;gap:8px;font-size:13px;}
+  .mrow i{font-style:normal;font-weight:700;color:var(--m);}
+  .mrow .track{height:6px;border-radius:3px;background:var(--fill);overflow:hidden;}
+  .mrow .track div{height:100%;border-radius:3px;background:var(--m);}
+  .mrow span{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+  .tone-on{--tone:var(--on);} .tone-off{--tone:var(--off);}
 
-  /* DAY TOGGLE */
-  .day-toggle{display:flex;gap:8px;margin-bottom:20px;align-items:center;flex-wrap:wrap;}
-  .toggle-btn{padding:8px 22px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;transition:all .2s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
-  .toggle-btn:hover{background:rgba(255,255,255,.10);color:var(--text);}
-  .toggle-btn.active-on{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.38);color:var(--green);box-shadow:0 0 22px rgba(74,222,128,.15),inset 0 1px 0 rgba(74,222,128,.2);}
-  .toggle-btn.active-off{background:rgba(255,140,66,.12);border-color:rgba(255,140,66,.38);color:var(--orange);box-shadow:0 0 22px rgba(255,140,66,.15),inset 0 1px 0 rgba(255,140,66,.2);}
+  /* meal */
+  .meal-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 16px 4px;}
+  .meal-h h3{font-size:19px;font-weight:700;letter-spacing:-.02em;}
+  .meal-h .sub{font-size:13px;color:var(--label2);}
+  .meal-h .kcal{font-family:var(--round);font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .meal-h .kcal small{font-size:12px;color:var(--label2);font-weight:600;}
+  .mline{display:flex;gap:12px;align-items:center;padding:4px 16px 10px;font-size:13px;color:var(--label2);font-variant-numeric:tabular-nums;}
+  .mline b{color:var(--label);}
+  .mline .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px;}
+  .split{display:flex;height:4px;border-radius:2px;overflow:hidden;flex:1;min-width:40px;gap:2px;}
+  .split div{height:100%;border-radius:2px;}
+  .food .q{font-variant-numeric:tabular-nums;color:var(--label2);white-space:nowrap;}
+  .food .n small{color:var(--label2);font-size:13px;}
+  .inner-seg{padding:4px 16px 8px;}
+  .vmeta{font-size:12px;color:var(--label2);text-align:center;margin-top:6px;font-variant-numeric:tabular-nums;}
+  .sumtag{font-size:15px;}
+  .sumtag em{font-style:normal;color:var(--label2);font-size:13px;margin-left:6px;}
 
-  /* MEALS */
-  .meals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
-  .meal-card{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;transition:all .2s;box-shadow:0 4px 28px rgba(0,0,0,.3),inset 0 1px 0 var(--glass-shine);}
-  .meal-card:hover{border-color:rgba(255,255,255,.22);transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.42),inset 0 1px 0 var(--glass-shine);}
-  .meal-header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);}
-  .meal-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;}
-  .meal-time{font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:1px;}
-  .meal-kcal{font-family:'DM Mono',monospace;font-size:12px;color:var(--yellow);background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.22);border-radius:8px;padding:3px 10px;white-space:nowrap;}
-  .meal-macros{display:flex;padding:10px 18px;gap:16px;border-bottom:1px solid rgba(255,255,255,.05);}
-  .macro-badge{font-family:'DM Mono',monospace;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px;}
-  .macro-badge span:first-child{color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em;}
-  .macro-badge.p span:last-child{color:var(--protein);}
-  .macro-badge.c span:last-child{color:var(--carbs);}
-  .macro-badge.g span:last-child{color:var(--fat);}
-  .meal-bar{height:3px;display:flex;margin:0 18px;border-radius:3px;overflow:hidden;}
-  .bar-p{background:var(--protein);height:100%;}
-  .bar-c{background:var(--carbs);height:100%;}
-  .bar-g{background:var(--fat);height:100%;}
-  .meal-foods{padding:13px 18px 16px;display:flex;flex-direction:column;gap:8px;}
-  .food-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
-  .food-name{font-size:13px;}
-  .food-qty{font-family:'DM Mono',monospace;font-size:12px;color:var(--ice);white-space:nowrap;}
-  .food-note{font-size:11px;color:var(--muted);font-style:italic;margin-top:-2px;}
-  .meal-prep{margin:2px 18px 16px;padding:9px 12px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.16);border-radius:10px;font-size:11px;color:var(--muted);line-height:1.45;}
-  .meal-prep b{color:var(--blue);font-weight:600;}
+  /* workout */
+  .wo-h{padding:18px 16px 8px;}
+  .wo-h .tag{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:100px;padding:3px 10px;margin-bottom:8px;}
+  .wo-h h3{font-size:24px;font-weight:700;letter-spacing:-.025em;}
+  .wo-h p{font-size:14px;color:var(--label2);}
+  .ex{align-items:flex-start;}
+  .ex .i{flex:none;width:24px;height:24px;border-radius:50%;background:var(--fill);font-size:12px;font-weight:600;display:grid;place-items:center;color:var(--label2);margin-top:1px;font-variant-numeric:tabular-nums;}
+  .ex .n{flex:1;min-width:0;}
+  .ex .r b{display:block;font-size:16px;}
+  .ex .r span{font-size:13px;color:var(--label2);}
+  .lift .goal{color:var(--on);font-weight:600;font-size:15px;}
 
-  /* swaps */
-  .swap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:6px;}
-  .swap-card{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:16px;padding:15px 17px;box-shadow:0 4px 18px rgba(0,0,0,.22),inset 0 1px 0 var(--glass-shine);}
-  .swap-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px;}
-  .swap-title.p{color:var(--protein);} .swap-title.c{color:var(--carbs);} .swap-title.g{color:var(--fat);} .swap-title.v{color:var(--green);}
-  .swap-list{display:flex;flex-direction:column;gap:5px;}
-  .swap-item{display:flex;justify-content:space-between;font-size:12px;gap:8px;}
-  .swap-item span:last-child{font-family:'DM Mono',monospace;color:var(--muted);white-space:nowrap;}
+  /* week */
+  .wk .d{width:40px;flex:none;font-weight:600;color:var(--label2);font-size:14px;}
+  .wk .w{flex:1;}
+  .wk.rest .w{color:var(--label2);}
+  .pill{font-size:12px;font-weight:700;border-radius:100px;padding:3px 9px;letter-spacing:.02em;}
+  .pill.on{color:var(--on);background:color-mix(in srgb,var(--on) 15%,transparent);}
+  .pill.off{color:var(--off);background:color-mix(in srgb,var(--off) 15%,transparent);}
+  .pill.opt{color:var(--label2);background:var(--fill);}
 
-  /* WORKOUT */
-  .workout-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
-  .day-card{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:22px;overflow:hidden;transition:all .2s;box-shadow:0 4px 28px rgba(0,0,0,.3),inset 0 1px 0 var(--glass-shine);}
-  .day-card:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.42),inset 0 1px 0 var(--glass-shine);}
-  .day-header{padding:15px 20px 13px;background:rgba(255,255,255,.03);}
-  .day-top{display:flex;justify-content:space-between;align-items:center;}
-  .day-title{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.06em;}
-  .day-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;padding:3px 10px;border-radius:8px;text-transform:uppercase;}
-  .day-focus{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.02em;}
-  .day-card.upper{border-top:2px solid rgba(255,123,123,.5);}
-  .day-card.upper .day-title{color:#ff7b7b;}
-  .day-card.upper .day-tag{background:rgba(239,68,68,.12);color:#ff7b7b;border:1px solid rgba(239,68,68,.25);}
-  .day-card.lower{border-top:2px solid rgba(74,222,128,.5);}
-  .day-card.lower .day-title{color:var(--green);}
-  .day-card.lower .day-tag{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.25);}
-  .day-card.arms{border-top:2px solid rgba(192,132,252,.5);}
-  .day-card.arms .day-title{color:var(--purple);}
-  .day-card.arms .day-tag{background:rgba(192,132,252,.12);color:var(--purple);border:1px solid rgba(192,132,252,.25);}
-  .ex-head{display:grid;grid-template-columns:18px 1fr auto auto;gap:10px;padding:8px 18px 4px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
-  .ex-head span:nth-child(3),.ex-head span:nth-child(4){text-align:right;}
-  .exercise-list{padding:2px 0 14px;}
-  .exercise-row{display:grid;grid-template-columns:18px 1fr auto auto;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;margin:2px 8px;transition:background .15s;}
-  .exercise-row:hover{background:rgba(255,255,255,.055);}
-  .ex-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);opacity:.65;}
-  .ex-name{font-size:13px;}
-  .ex-name .ex-aim{display:block;font-size:10px;color:var(--muted);font-style:italic;}
-  .ex-sets{font-family:'DM Mono',monospace;font-size:12px;color:var(--text);white-space:nowrap;text-align:right;}
-  .ex-rest{font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);white-space:nowrap;text-align:right;min-width:42px;}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+  th{font-size:12px;font-weight:600;color:var(--label2);text-transform:uppercase;letter-spacing:.03em;text-align:right;padding:12px 16px 6px;}
+  th:first-child,td:first-child{text-align:left;}
+  td{padding:10px 16px;text-align:right;border-top:.5px solid var(--sep);}
+  tfoot td{font-weight:700;font-family:var(--round);font-size:17px;}
+  .c-on{color:var(--on);} .c-off{color:var(--off);}
 
-  /* RULES */
-  .rules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px;margin-top:18px;}
-  .rule-card{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:18px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 4px 18px rgba(0,0,0,.2),inset 0 1px 0 var(--glass-shine);transition:all .2s;}
-  .rule-card:hover{transform:translateY(-1px);background:rgba(255,255,255,.09);}
-  .rule-icon{font-size:18px;line-height:1.3;flex-shrink:0;}
-  .rule-text{font-size:13px;line-height:1.5;}
-  .rule-text strong{color:var(--ice);display:block;margin-bottom:2px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;}
+  .note{border-radius:22px;padding:16px;background:color-mix(in srgb,var(--accent) 10%,var(--card));font-size:14px;line-height:1.5;color:var(--label2);margin-top:12px;}
+  .note h4{font-size:16px;color:var(--label);margin-bottom:4px;letter-spacing:-.01em;}
+  .note b{color:var(--label);}
 
-  /* TABLE */
-  .table-wrap{overflow-x:auto;border-radius:20px;margin-top:18px;}
-  .summary-table{width:100%;border-collapse:collapse;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:20px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 8px 36px rgba(0,0,0,.3),inset 0 1px 0 var(--glass-shine);min-width:520px;}
-  .summary-table th{text-align:left;padding:13px 18px;font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);font-weight:500;background:rgba(255,255,255,.03);}
-  .summary-table td{padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;}
-  .summary-table td.m{font-family:'DM Mono',monospace;}
-  .summary-table tr:last-child td{border-bottom:none;}
-  .summary-table tr:hover td{background:rgba(255,255,255,.04);}
-  .summary-table .total-row td{font-weight:600;background:rgba(255,255,255,.05);font-family:'DM Mono',monospace;font-size:14px;border-top:1px solid rgba(255,255,255,.1);}
-
-  /* WEEK */
-  .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:18px;}
-  .week-day{background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:12px 8px;text-align:center;box-shadow:inset 0 1px 0 var(--glass-shine);}
-  .week-day .wd-name{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
-  .week-day .wd-tag{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.04em;line-height:1.15;}
-  .week-day .wd-diet{font-family:'DM Mono',monospace;font-size:9px;margin-top:6px;}
-  .wd-upper{color:#ff7b7b;} .wd-lower{color:var(--green);} .wd-rest{color:var(--muted);} .wd-pizza{color:var(--yellow);}
-  .wd-on{color:var(--green);} .wd-off{color:var(--orange);}
-
-  /* shopping */
-  .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:18px;}
-  .shop-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:15px 17px;box-shadow:inset 0 1px 0 var(--glass-shine);}
-  .shop-cat{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;}
-  .shop-cat b{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.05em;color:var(--ice);}
-  .shop-cat span{font-family:'DM Mono',monospace;font-size:12px;color:var(--green);}
-  .shop-items{font-size:12px;color:var(--muted);line-height:1.55;}
-  .budget-bar{margin-top:16px;background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;box-shadow:inset 0 1px 0 var(--glass-shine);}
-  .budget-bar b{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em;color:var(--green);}
-
-  .callout{margin-top:18px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.22);border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;}
-  .callout .ci{font-size:24px;}
-  .callout h4{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.05em;color:var(--yellow);margin-bottom:4px;}
-  .callout p{font-size:13px;color:var(--text);line-height:1.55;}
-
-  .footer{padding:8px 40px 50px;color:var(--muted);font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.04em;}
-
-  @media (max-width:760px){
-    .header{padding:34px 18px 18px;}
-    .energy-strip{margin:18px 18px 0;}
-    .rm-caption{margin:18px 18px 0;}
-    .roadmap{grid-template-columns:repeat(4,1fr);margin:8px 18px 0;}
-    .tabs-wrapper{padding:10px 18px;}
-    .main{padding:22px 18px 54px;}
-    .macro-banner{grid-template-columns:1fr;}
-    .tab{padding:8px 14px;font-size:12px;}
-    .week-grid{grid-template-columns:repeat(2,1fr);}
-  }
+  /* tab bar */
+  .tabbar{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 6px);width:calc(100% - 32px);max-width:420px;display:flex;padding:5px;border-radius:100px;background:var(--bar);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 0 0 .5px var(--sep),0 10px 30px rgba(0,0,0,.18);}
+  .tabbar button{flex:1;border:0;background:none;font:inherit;color:var(--label2);display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 0 6px;border-radius:100px;cursor:pointer;font-size:10px;font-weight:600;transition:background .2s,color .2s;}
+  .tabbar svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .tabbar button.on{color:var(--accent);background:var(--fill);}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-label">Programmazione personalizzata · bulk invernale 26/27</div>
-  <h1>WINTER <span>ARC</span></h1>
-  <div class="header-sub">Massa pulita · costruisci muscolo, non grasso</div>
-  <div class="stats-row">
-    <div class="stat"><span class="stat-label">Start · 24 ago</span><span class="stat-value">91,5 kg</span></div>
-    <div class="stat alt"><span class="stat-label">Obiettivo · metà marzo</span><span class="stat-value">100 kg</span></div>
-    <div class="stat alt2"><span class="stat-label">Altezza</span><span class="stat-value">1.87 m</span></div>
-    <div class="stat"><span class="stat-label">Split</span><span class="stat-value">4× U/L</span></div>
-  </div>
+<div class="wrap">
+  <div class="eyebrow">Winter Arc · 26/27</div>
+  <h1 id="title">Piano</h1>
+
+  <section class="view" id="v-piano"></section>
+  <section class="view" id="v-dieta"></section>
+  <section class="view" id="v-allenamento"></section>
+  <section class="view" id="v-spesa"></section>
 </div>
 
-<div class="energy-strip">
-  <div class="energy-cell"><div class="ec-label">Mantenimento stimato</div><div class="ec-val">~2.900 <small>kcal</small></div></div>
-  <div class="ec-arrow">+</div>
-  <div class="energy-cell"><div class="ec-label">Surplus medio</div><div class="ec-val" style="color:var(--green)">~310 <small>kcal</small></div></div>
-  <div class="ec-arrow">=</div>
-  <div class="energy-cell"><div class="ec-label">Media settimanale</div><div class="ec-val" style="color:var(--ice)">~3.210 <small>kcal</small></div></div>
-  <div class="ec-arrow">≈</div>
-  <div class="energy-cell"><div class="ec-label">Crescita attesa</div><div class="ec-val" style="color:var(--green)">+0,2–0,3 <small>kg/sett</small></div></div>
-  <div class="ec-arrow">→</div>
-  <div class="energy-cell"><div class="ec-label">Traguardo</div><div class="ec-val" style="color:var(--yellow)">100 <small>kg · marzo</small></div></div>
-</div>
-
-<div class="rm-caption">La rotta · ~1,2 kg al mese · deload sett 7 · 13 · 18 (Natale) · 24</div>
-<div class="roadmap">
-  <div class="rm-cell start"><div class="rm-month">24 Ago</div><div class="rm-kg">91,5</div></div>
-  <div class="rm-cell"><div class="rm-month">Fine Set</div><div class="rm-kg">~93,5</div></div>
-  <div class="rm-cell"><div class="rm-month">Fine Ott</div><div class="rm-kg">~94,5</div></div>
-  <div class="rm-cell"><div class="rm-month">Fine Nov</div><div class="rm-kg">~96</div></div>
-  <div class="rm-cell"><div class="rm-month">Natale</div><div class="rm-kg">~97</div></div>
-  <div class="rm-cell"><div class="rm-month">Fine Gen</div><div class="rm-kg">~98,5</div></div>
-  <div class="rm-cell"><div class="rm-month">Fine Feb</div><div class="rm-kg">~99,5</div></div>
-  <div class="rm-cell goal"><div class="rm-month">15 Mar</div><div class="rm-kg">100 🎯</div></div>
-</div>
-
-<div class="tabs-wrapper">
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('diet',this)">🍽 Dieta</div>
-    <div class="tab" onclick="switchTab('workout',this)">🏋 Allenamento</div>
-    <div class="tab" onclick="switchTab('summary',this)">📊 Riepilogo &amp; Spesa</div>
-  </div>
-</div>
-
-<div class="main">
-
-  <!-- ===================== DIET ===================== -->
-  <div id="diet" class="section active">
-
-    <div class="macro-banner">
-      <div class="macro-card on">
-        <div class="macro-card-title">GIORNO ON 🟢</div>
-        <div class="macro-card-meta">Giorni di allenamento · carbo alti attorno al workout</div>
-        <div class="macro-card-kcal">3.330 kcal</div>
-        <div class="macro-pills"><span class="pill p">P 198g</span><span class="pill c">C 415g</span><span class="pill g">G 93g</span></div>
-      </div>
-      <div class="macro-card off">
-        <div class="macro-card-title">GIORNO OFF 🟠</div>
-        <div class="macro-card-meta">Giorni di riposo · si cresce anche da fermi</div>
-        <div class="macro-card-kcal">3.080 kcal</div>
-        <div class="macro-pills"><span class="pill p">P 214g</span><span class="pill c">C 327g</span><span class="pill g">G 102g</span></div>
-      </div>
-    </div>
-
-    <div class="day-toggle">
-      <span style="color:var(--muted);font-size:12px;margin-right:4px">Mostra:</span>
-      <button class="toggle-btn active-on" id="btn-on" onclick="showDay('on')">Giorno ON</button>
-      <button class="toggle-btn" id="btn-off" onclick="showDay('off')">Giorno OFF</button>
-    </div>
-
-    <!-- ON -->
-    <div id="meals-on" class="meals-grid">
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🌅 Colazione<span class="meal-time">porridge compatto</span></span><span class="meal-kcal">725 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>45g</span></div><div class="macro-badge c"><span>Carb</span><span>86g</span></div><div class="macro-badge g"><span>Grassi</span><span>23g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:25%"></div><div class="bar-c" style="width:47%"></div><div class="bar-g" style="width:28%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Avena</span><span class="food-qty">60 g</span></div>
-          <div class="food-row"><span class="food-name">Skyr / yogurt greco 0%</span><span class="food-qty">200 g</span></div>
-          <div class="food-row"><span class="food-name">Banana</span><span class="food-qty">120 g</span></div>
-          <div class="food-row"><span class="food-name">Burro d'arachidi</span><span class="food-qty">30 g</span></div>
-          <div class="food-row"><span class="food-name">Latte parz. scremato <span style="color:var(--muted);font-size:11px">(da bere)</span></span><span class="food-qty">200 ml</span></div>
-        </div>
-        <div class="meal-prep"><b>5 min</b> · Avena al microonde 90 sec, skyr fuori dal fuoco, banana e burro d'arachidi sopra; il latte lo bevi a parte. 60 g di avena invece di 100 perché il fiocco assorbe 3-4 volte il suo peso in acqua e ti gonfia. Niente miele: la banana basta a renderlo dolce.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Ancora troppo pesante?</b> Bevi il latte a metà mattina invece che a colazione: le calorie restano nella giornata, il piatto si alleggerisce.</div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🥛 Spuntino<span class="meal-time">metà mattina</span></span><span class="meal-kcal">565 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>31g</span></div><div class="macro-badge c"><span>Carb</span><span>51g</span></div><div class="macro-badge g"><span>Grassi</span><span>24g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:23%"></div><div class="bar-c" style="width:37%"></div><div class="bar-g" style="width:40%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Fiocchi di latte light</span><span class="food-qty">200 g</span></div>
-          <div class="food-row"><span class="food-name">Crackers</span><span class="food-qty">45 g</span></div>
-          <div class="food-row"><span class="food-name">Marmellata</span><span class="food-qty">20 g</span></div>
-          <div class="food-row"><span class="food-name">Noci</span><span class="food-qty">20 g</span></div>
-          <div class="food-row"><span class="food-name">Caffè</span><span class="food-qty">×2</span></div>
-        </div>
-        <div class="meal-prep"><b>0 min</b> · Tutto portatile: crackers con la marmellata, le noci chiudono i grassi buoni. 45 g di crackers valgono i 70 g di pane, ma pesano meno sullo stomaco prima di pranzo.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Niente fiocchi di latte?</b> Sostituisci i 200 g (~25 g proteine) con:<br>· <b style="color:var(--text)">Skyr / yogurt greco 200 g</b> <span style="color:var(--muted)">(il più simile)</span> · <b style="color:var(--text)">Tonno 120 g</b>, <b style="color:var(--text)">bresaola 70 g</b> o <b style="color:var(--text)">prosciutto cotto ~120 g</b> <span style="color:var(--muted)">(rotazione, non fisso: più salato)</span> · <b style="color:var(--text)">shaker whey 30 g</b><br>· <b style="color:var(--text)">Uova 3</b> <span style="color:var(--muted)">ok ma più grasse — vale anche per lo spuntino OFF.</span></div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🍚 Pranzo<span class="meal-time">schiscetta</span></span><span class="meal-kcal">730 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>40g</span></div><div class="macro-badge c"><span>Carb</span><span>98g</span></div><div class="macro-badge g"><span>Grassi</span><span>18g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:22%"></div><div class="bar-c" style="width:55%"></div><div class="bar-g" style="width:23%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Riso basmati <span style="color:var(--muted);font-size:11px">(crudo)</span></span><span class="food-qty">120 g</span></div>
-          <div class="food-row"><span class="food-name">Petto di pollo <span style="color:var(--muted);font-size:11px">(crudo)</span></span><span class="food-qty">130 g</span></div>
-          <div class="food-row"><span class="food-name">Olio EVO</span><span class="food-qty">15 g</span></div>
-          <div class="food-row"><span class="food-name">Verdure</span><span class="food-qty">~100 g</span></div>
-        </div>
-        <div class="meal-prep"><b>Prep la sera prima</b> · Un terzo di volume in meno rispetto a prima (da ~840 g a ~560 g nel piatto). Le calorie tolte qui sono passate al pre-WO e ai giorni OFF, dove entrano più facilmente. Verdure 100 g e basta: saziano senza dare calorie, nei giorni ON non ti servono a pranzo.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Ancora non va giù?</b> Dividilo: metà alle 12:30, metà verso le 15:30. Contano le calorie della giornata, non l'orario del pasto.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Hai salmone affumicato e gnocchi?</b> Gnocchi 280 g + salmone affumicato 120 g + olio 10 g + verdure <span style="color:var(--muted)">(~650 kcal · P41 · C84 · F15)</span>. Occasionale, non fisso: il salmone affumicato è molto salato (ritenzione → falso peso il giorno dopo). Giorno OFF: gnocchi 250 g + salmone 130 g.</div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">⚡ Pre-WO<span class="meal-time">pomeriggio · tutto portatile</span></span><span class="meal-kcal">570 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>34g</span></div><div class="macro-badge c"><span>Carb</span><span>97g</span></div><div class="macro-badge g"><span>Grassi</span><span>5g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:24%"></div><div class="bar-c" style="width:68%"></div><div class="bar-g" style="width:8%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Pan bauletto di grano duro <span style="color:var(--muted);font-size:11px">(~4 fette)</span></span><span class="food-qty">100 g</span></div>
-          <div class="food-row"><span class="food-name">Marmellata</span><span class="food-qty">30 g</span></div>
-          <div class="food-row"><span class="food-name">Banana</span><span class="food-qty">120 g</span></div>
-          <div class="food-row"><span class="food-name">Whey protein <span style="color:var(--muted);font-size:11px">(shaker con acqua)</span></span><span class="food-qty">30 g</span></div>
-          <div class="food-row"><span class="food-name">Creatina</span><span class="food-qty">6 g</span></div>
-        </div>
-        <div class="meal-prep"><b>1 min</b> · Due toast di bauletto con la marmellata, la banana, e la whey nello shaker con acqua. Carbo rapidi e pochi grassi: si digerisce in fretta e arrivi alla seduta carico, non pieno. Mangialo 60-90 min prima.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Senza banana?</b> Qui servono zuccheri rapidi (vale ~105 kcal):<br>· <b style="color:var(--text)">+40 g di marmellata</b> sul bauletto <span style="color:var(--muted)">(~100 kcal)</span><br>· oppure <b style="color:var(--text)">mela ~180 g</b> o <b style="color:var(--text)">uva ~150 g</b> <span style="color:var(--muted)">(~95 kcal)</span></div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🥩 Cena<span class="meal-time">post-workout · ~21:00</span></span><span class="meal-kcal">740 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>48g</span></div><div class="macro-badge c"><span>Carb</span><span>83g</span></div><div class="macro-badge g"><span>Grassi</span><span>23g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:26%"></div><div class="bar-c" style="width:45%"></div><div class="bar-g" style="width:29%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Pollo / merluzzo / gamberi</span><span class="food-qty">160–200 g</span></div>
-          <div class="food-row"><span class="food-name">Patate <b style="color:var(--muted);font-weight:400">oppure</b> pane</span><span class="food-qty">450 g / 140 g</span></div>
-          <div class="food-row"><span class="food-name">Olio EVO</span><span class="food-qty">20 g</span></div>
-          <div class="food-row"><span class="food-name">Verdure</span><span class="food-qty">~150 g</span></div>
-        </div>
-        <div class="meal-prep"><b>10 min</b> · Merluzzo e gamberi cuociono in 5 min, patate al microonde. Il pasto che ricarica il glicogeno per la seduta di domani.</div>
-        <div class="food-note" style="margin:0 18px 10px">Patate o pane si equivalgono (~80 g di carbo). Se la sera sei già pieno scegli il pane: occupa un terzo del volume delle patate.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Salmone fresco 2 sere a settimana</b> — al posto del pollo: salmone 180 g, <b style="color:var(--text)">niente olio aggiunto</b>, patate 450 g o pane 140 g <span style="color:var(--muted)">(~745 kcal · P47 · C83 · F24)</span>. Omega-3 e grassi buoni: in massa il salmone è un alleato, non un extra.</div>
-      </div>
-
-    </div>
-
-    <!-- OFF -->
-    <div id="meals-off" class="meals-grid" style="display:none">
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🌅 Colazione<span class="meal-time">dolce o salata, scegli al mattino</span></span><span class="meal-kcal">~670 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>~38g</span></div><div class="macro-badge c"><span>Carb</span><span>~77g</span></div><div class="macro-badge g"><span>Grassi</span><span>~24g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:22%"></div><div class="bar-c" style="width:46%"></div><div class="bar-g" style="width:32%"></div></div>
-        <div class="meal-foods">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)"><b>🍯 Dolce</b><span style="font-family:'DM Mono',monospace;letter-spacing:0;text-transform:none;color:var(--muted)">660 kcal · P34 · C78 · G24</span></div>
-          <div class="food-row"><span class="food-name">Skyr / yogurt greco 0%</span><span class="food-qty">200 g</span></div>
-          <div class="food-row"><span class="food-name">Avena</span><span class="food-qty">50 g</span></div>
-          <div class="food-row"><span class="food-name">Banana</span><span class="food-qty">120 g</span></div>
-          <div class="food-row"><span class="food-name">Noci</span><span class="food-qty">30 g</span></div>
-          <div class="food-row"><span class="food-name">Miele</span><span class="food-qty">10 g</span></div>
-          <div class="food-note" style="text-align:center;margin:4px 0;font-style:normal;letter-spacing:.1em">— OPPURE —</div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)"><b>🍳 Salata</b><span style="font-family:'DM Mono',monospace;letter-spacing:0;text-transform:none;color:var(--muted)">680 kcal · P43 · C76 · G23</span></div>
-          <div class="food-row"><span class="food-name">Uova</span><span class="food-qty">3 (150 g)</span></div>
-          <div class="food-row"><span class="food-name">Pane <span style="color:var(--muted);font-size:11px">(2 fette)</span></span><span class="food-qty">70 g</span></div>
-          <div class="food-row"><span class="food-name">Avocado</span><span class="food-qty">50 g</span></div>
-          <div class="food-row"><span class="food-name">Yogurt greco 0% <span style="color:var(--muted);font-size:11px">(a fine pasto)</span></span><span class="food-qty">150 g</span></div>
-          <div class="food-row"><span class="food-name">Banana <span style="color:var(--muted);font-size:11px">(nello yogurt)</span></span><span class="food-qty">120 g</span></div>
-        </div>
-        <div class="meal-prep"><b>Dolce · 2 min</b> · Bowl fredda: skyr in ciotola, avena cruda sopra, banana a rondelle, noci spezzate e un filo di miele. Diversa dal porridge dei giorni ON: niente fornelli, e le noci portano i grassi del giorno OFF.</div>
-        <div class="meal-prep"><b>Salata · 6 min</b> · Uova strapazzate e due fette di pane tostato con l'avocado schiacciato. Per chiudere, yogurt greco con la banana a rondelle. Il pane scende da 140 a 70 g: la banana recupera i carbo, lo yogurt aggiunge proteine senza appesantire il piatto.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Varianti:</b><br>· <b style="color:var(--text)">Dolce:</b> avena → muesli senza zucchero 55 g o corn flakes 50 g · noci → mandorle 30 g · banana → mela 180 g o frutti di bosco 200 g<br>· <b style="color:var(--text)">Salata:</b> yogurt greco → skyr 150 g · avocado → olio EVO 7 g sul pane · banana → frutti di bosco 200 g nello yogurt o spremuta d'arancia 250 ml<br>· <b style="color:var(--text)">Veloce 0 min:</b> fiocchi di latte 250 g + crackers 50 g + noci 15 g + banana <span style="color:var(--muted)">(~655 kcal · P39)</span></div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🥛 Spuntino<span class="meal-time">metà mattina</span></span><span class="meal-kcal">525 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>32g</span></div><div class="macro-badge c"><span>Carb</span><span>36g</span></div><div class="macro-badge g"><span>Grassi</span><span>27g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:25%"></div><div class="bar-c" style="width:28%"></div><div class="bar-g" style="width:47%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Fiocchi di latte light</span><span class="food-qty">200 g</span></div>
-          <div class="food-row"><span class="food-name">Crackers</span><span class="food-qty">40 g</span></div>
-          <div class="food-row"><span class="food-name">Noci</span><span class="food-qty">25 g</span></div>
-          <div class="food-row"><span class="food-name">Caffè</span><span class="food-qty">×2</span></div>
-        </div>
-        <div class="meal-prep"><b>0 min</b> · Nei giorni di riposo i carbo scendono un po' e salgono i grassi: le noci in più portano i giorni OFF sopra il mantenimento. Qui si recupera, non si taglia.</div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🍝 Pranzo<span class="meal-time">schiscetta</span></span><span class="meal-kcal">745 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>46g</span></div><div class="macro-badge c"><span>Carb</span><span>83g</span></div><div class="macro-badge g"><span>Grassi</span><span>23g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:25%"></div><div class="bar-c" style="width:47%"></div><div class="bar-g" style="width:28%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Pasta <span style="color:var(--muted);font-size:11px">(cruda)</span></span><span class="food-qty">110 g</span></div>
-          <div class="food-row"><span class="food-name">Tonno al naturale</span><span class="food-qty">130 g</span></div>
-          <div class="food-row"><span class="food-name">Olio EVO</span><span class="food-qty">20 g</span></div>
-          <div class="food-row"><span class="food-name">Verdure</span><span class="food-qty">≥150 g</span></div>
-        </div>
-        <div class="meal-prep"><b>Prep la sera prima</b> · Insalata di pasta fredda: si prepara in anticipo, perfetta da ufficio. +30 g di pasta rispetto al cut.</div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🥤 Spuntino<span class="meal-time">pomeriggio</span></span><span class="meal-kcal">350 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>41g</span></div><div class="macro-badge c"><span>Carb</span><span>44g</span></div><div class="macro-badge g"><span>Grassi</span><span>2g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:46%"></div><div class="bar-c" style="width:49%"></div><div class="bar-g" style="width:5%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Skyr</span><span class="food-qty">200 g</span></div>
-          <div class="food-row"><span class="food-name">Whey protein</span><span class="food-qty">25 g</span></div>
-          <div class="food-row"><span class="food-name">Banana</span><span class="food-qty">120 g</span></div>
-          <div class="food-row"><span class="food-name">Miele</span><span class="food-qty">10 g</span></div>
-          <div class="food-row"><span class="food-name">Creatina</span><span class="food-qty">6 g</span></div>
-        </div>
-        <div class="meal-prep"><b>1 min</b> · La creatina si prende anche nei giorni di riposo: conta la costanza, non l'orario. Mai ciclizzarla.</div>
-        <div class="meal-prep" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.18)"><b style="color:var(--ice)">Senza banana?</b> Vale ~105 kcal · 26 g carbo:<br>· <b style="color:var(--text)">Marmellata 40 g</b> oppure <b style="color:var(--text)">miele a 45 g totali</b> (+35 g) direttamente nello skyr con la whey <span style="color:var(--muted)">(~108 kcal — viene fuori una crema dolce)</span><br>· oppure <b style="color:var(--text)">mela ~180 g</b> / <b style="color:var(--text)">uva ~150 g</b> <span style="color:var(--muted)">(~95 kcal)</span></div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-header"><span class="meal-name">🥩 Cena<span class="meal-time">sera</span></span><span class="meal-kcal">790 kcal</span></div>
-        <div class="meal-macros"><div class="macro-badge p"><span>Prot</span><span>56g</span></div><div class="macro-badge c"><span>Carb</span><span>87g</span></div><div class="macro-badge g"><span>Grassi</span><span>26g</span></div></div>
-        <div class="meal-bar"><div class="bar-p" style="width:28%"></div><div class="bar-c" style="width:43%"></div><div class="bar-g" style="width:29%"></div></div>
-        <div class="meal-foods">
-          <div class="food-row"><span class="food-name">Macinato bovino 5%</span><span class="food-qty">220 g</span></div>
-          <div class="food-row"><span class="food-name">Patate dolci <b style="color:var(--muted);font-weight:400">oppure</b> pane</span><span class="food-qty">400 g / 140 g</span></div>
-          <div class="food-row"><span class="food-name">Olio EVO</span><span class="food-qty">15 g</span></div>
-          <div class="food-row"><span class="food-name">Verdure</span><span class="food-qty">≥200 g</span></div>
-        </div>
-        <div class="meal-prep"><b>8 min</b> · Macinato in padella, patate dolci a cubetti al microonde. La cena OFF più abbondante del cut: il muscolo si costruisce nel recupero.</div>
-        <div class="food-note" style="margin:0 18px 10px">Patate dolci o pane si equivalgono (~80 g di carbo, come la cena ON). Il pane occupa un terzo del volume: sceglilo se la sera sei già pieno.</div>
-      </div>
-
-    </div>
-
-    <div class="callout" style="background:rgba(111,214,255,.06);border-color:rgba(111,214,255,.2)">
-      <span class="ci">🥄</span>
-      <div><h4 style="color:var(--ice)">Mangiare tanto senza stare male</h4>
-      <p><b>Calorie dense, non volume:</b> olio, burro d'arachidi, noci, grana e latte aggiungono energia senza riempire il piatto. <b>Bevi tra un pasto e l'altro</b>, non durante: l'acqua a tavola occupa lo stomaco. <b>Verdure moderate nei giorni ON</b> e niente integrali a pranzo, perché fibre e volume sono ciò che ti blocca. <b>Il pasto non va giù?</b> Spezzalo in due a distanza di 2-3 ore. Nella giornata le calorie restano le stesse.</p></div>
-    </div>
-
-    <!-- COSTRUISCI IL PIATTO -->
-    <div class="section-title">🔁 Costruisci il piatto</div>
-    <div class="section-sub">Pranzo e cena a moduli. Scegli 1 proteina + 1 carbo + 1 grasso + verdure. Le porzioni sono già equivalenti — ruoti a piacere e i conti restano in piedi. A pranzo riso o pasta (i più compatti), a cena patate o pane. Se fai fatica a finire il piatto, il pane occupa un terzo del volume delle patate.</div>
-    <div class="swap-grid">
-      <div class="swap-card">
-        <div class="swap-title p">Proteine · pranzo / cena</div>
-        <div class="swap-list">
-          <div class="swap-item"><span>Pollo</span><span>130 / 160 g</span></div>
-          <div class="swap-item"><span>Merluzzo</span><span>170 / 200 g</span></div>
-          <div class="swap-item"><span>Gamberi</span><span>150 / 185 g</span></div>
-          <div class="swap-item"><span>Salmone fresco</span><span>150 / 180 g</span></div>
-          <div class="swap-item"><span>Tonno naturale</span><span>130 / 160 g</span></div>
-          <div class="swap-item"><span>Macinato 5%</span><span>140 / 170 g</span></div>
-          <div class="swap-item"><span>Bresaola</span><span>90 / 110 g</span></div>
-          <div class="swap-item"><span>Uova</span><span>3+2 / 4+2 albumi</span></div>
-        </div>
-      </div>
-      <div class="swap-card">
-        <div class="swap-title c">Carbo pranzo · ON / OFF</div>
-        <div class="swap-list">
-          <div class="swap-item"><span>Riso basmati</span><span>120 / 110 g</span></div>
-          <div class="swap-item"><span>Pasta</span><span>120 / 110 g</span></div>
-          <div class="swap-item"><span>Pane</span><span>160 / 150 g</span></div>
-          <div class="swap-item"><span>Patate</span><span>500 / 460 g</span></div>
-          <div class="swap-item"><span>Patate dolci</span><span>490 / 450 g</span></div>
-          <div class="swap-item"><span>Gnocchi</span><span>280 / 260 g</span></div>
-        </div>
-      </div>
-      <div class="swap-card">
-        <div class="swap-title g">Grassi · scegline 1</div>
-        <div class="swap-list">
-          <div class="swap-item"><span>Olio EVO</span><span>15 g</span></div>
-          <div class="swap-item"><span>Avocado</span><span>85 g</span></div>
-          <div class="swap-item"><span>Noci / frutta secca</span><span>20 g</span></div>
-          <div class="swap-item"><span>Burro d'arachidi</span><span>22 g</span></div>
-        </div>
-        <div class="swap-title v" style="margin-top:12px">Verdure · libere</div>
-        <div class="swap-list"><div class="swap-item"><span>Fresche o surgelate</span><span>100–200 g</span></div></div>
-      </div>
-      <div class="swap-card">
-        <div class="swap-title" style="color:var(--purple)">Combo già pronte</div>
-        <div class="swap-list" style="gap:8px">
-          <div class="swap-item"><span>🍱 Poke: riso + salmone + avocado</span><span></span></div>
-          <div class="swap-item"><span>🍝 Pasta fredda + tonno</span><span></span></div>
-          <div class="swap-item"><span>🍔 Burger bowl: macinato + patate</span><span></span></div>
-          <div class="swap-item"><span>🥟 Gnocchi e salmone</span><span></span></div>
-          <div class="swap-item"><span>🍳 Toast uova + avocado (SOS)</span><span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <span class="ci">🍕</span>
-      <div><h4>Giovedì — la pizza ora lavora per te</h4>
-      <p>La pizza wurstel e patatine del giovedì resta, e in bulk smette di essere uno strappo: è surplus programmato. Mangia normale durante il giorno (ON o OFF secondo calendario, saltando la cena prevista) e la pizza chiude la giornata a ~3.400–3.600 kcal — esattamente dove serve. Niente compensazioni prima, niente sensi di colpa dopo: un pasto libero a settimana tiene alta l'aderenza per 29 settimane, ed è l'aderenza che ti porta a 100.</p></div>
-    </div>
-
-  </div>
-
-  <!-- ===================== WORKOUT ===================== -->
-  <div id="workout" class="section">
-    <div class="section-title">Split 4 Giorni (+1 opzionale) · Upper / Lower ×2</div>
-    <div class="section-sub">Stesso scheletro che ha funzionato nel cut — ogni gruppo 2×/settimana (Schoenfeld 2016) — ma filosofia ribaltata: <b style="color:var(--ice)">in surplus la progressione è l'obiettivo n°1</b>. Serie dritte, RIR 1-2 sui fondamentali, ultime serie degli accessori spinte a RIR 0-1, eccentrica 2-3 sec. Volume su (~88 serie/sett): ora hai le calorie per recuperarlo. <b style="color:var(--text)">Upper A petto+dorso pesante</b> · <b style="color:var(--text)">Upper B spalle+petto volume</b> · <b style="color:var(--text)">Lower A squat</b> · <b style="color:var(--text)">Lower B stacco</b> — il pesante da terra torna protagonista. Addome e face pull ora sono nel programma, non opzionali.</div>
-
-    <div class="workout-grid">
-
-      <div class="day-card upper">
-        <div class="day-header"><div class="day-top"><span class="day-title">Day 1 · Upper A</span><span class="day-tag">Pesante</span></div><div class="day-focus">Petto + Dorso · spinta e tirata orizzontale</div></div>
-        <div class="ex-head"><span>#</span><span>Esercizio</span><span>Serie×Rip</span><span>Rec</span></div>
-        <div class="exercise-list">
-          <div class="exercise-row"><span class="ex-num">1</span><span class="ex-name">Panca piana bilanciere<span class="ex-aim">petto · progressione · start 100 kg</span></span><span class="ex-sets">4×5–6</span><span class="ex-rest">3′</span></div>
-          <div class="exercise-row"><span class="ex-num">2</span><span class="ex-name">Rematore bilanciere<span class="ex-aim">dorso · spessore · start 70 kg</span></span><span class="ex-sets">4×6–8</span><span class="ex-rest">2.5′</span></div>
-          <div class="exercise-row"><span class="ex-num">3</span><span class="ex-name">Panca inclinata manubri<span class="ex-aim">petto alto · start 32 kg/man.</span></span><span class="ex-sets">3×8–10</span><span class="ex-rest">2′</span></div>
-          <div class="exercise-row"><span class="ex-num">4</span><span class="ex-name">Lat machine / Trazioni zavorrate<span class="ex-aim">dorso · ampiezza</span></span><span class="ex-sets">3×8–10</span><span class="ex-rest">2′</span></div>
-          <div class="exercise-row"><span class="ex-num">5</span><span class="ex-name">Alzate laterali<span class="ex-aim">spalle · larghezza (priorità estetica)</span></span><span class="ex-sets">4×12–15</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">6</span><span class="ex-name">Curl bilanciere EZ<span class="ex-aim">bicipiti · diretto</span></span><span class="ex-sets">3×8–12</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">7</span><span class="ex-name">Push-down tricipiti<span class="ex-aim">tricipiti · diretto</span></span><span class="ex-sets">3×10–12</span><span class="ex-rest">60″</span></div>
-        </div>
-      </div>
-
-      <div class="day-card lower">
-        <div class="day-header"><div class="day-top"><span class="day-title">Day 2 · Lower A</span><span class="day-tag">Squat</span></div><div class="day-focus">Quadricipiti · gamba pesante</div></div>
-        <div class="ex-head"><span>#</span><span>Esercizio</span><span>Serie×Rip</span><span>Rec</span></div>
-        <div class="exercise-list">
-          <div class="exercise-row"><span class="ex-num">1</span><span class="ex-name">Squat bilanciere<span class="ex-aim">forza gambe · start 120 kg</span></span><span class="ex-sets">4×5–6</span><span class="ex-rest">3′</span></div>
-          <div class="exercise-row"><span class="ex-num">2</span><span class="ex-name">Stacco rumeno (RDL)<span class="ex-aim">femorali/glutei · start 120 kg</span></span><span class="ex-sets">3×8</span><span class="ex-rest">2.5′</span></div>
-          <div class="exercise-row"><span class="ex-num">3</span><span class="ex-name">Leg press<span class="ex-aim">quadricipiti · volume</span></span><span class="ex-sets">4×10–12</span><span class="ex-rest">90″</span></div>
-          <div class="exercise-row"><span class="ex-num">4</span><span class="ex-name">Leg curl seduto<span class="ex-aim">femorali</span></span><span class="ex-sets">3×12–15</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">5</span><span class="ex-name">Calf in piedi<span class="ex-aim">polpacci · pausa 1″ in basso</span></span><span class="ex-sets">4×12–15</span><span class="ex-rest">45″</span></div>
-          <div class="exercise-row"><span class="ex-num">6</span><span class="ex-name">Crunch ai cavi<span class="ex-aim">addome · zavorrato, progressivo</span></span><span class="ex-sets">3×12–15</span><span class="ex-rest">45″</span></div>
-        </div>
-      </div>
-
-      <div class="day-card upper">
-        <div class="day-header"><div class="day-top"><span class="day-title">Day 3 · Upper B</span><span class="day-tag">Ipertrofia</span></div><div class="day-focus">Spalle + Petto · volume e allungamento</div></div>
-        <div class="ex-head"><span>#</span><span>Esercizio</span><span>Serie×Rip</span><span>Rec</span></div>
-        <div class="exercise-list">
-          <div class="exercise-row"><span class="ex-num">1</span><span class="ex-name">Lento avanti bilanciere<span class="ex-aim">spalle · progressione · start 47,5 kg</span></span><span class="ex-sets">4×6–8</span><span class="ex-rest">2.5′</span></div>
-          <div class="exercise-row"><span class="ex-num">2</span><span class="ex-name">Dip alle parallele<span class="ex-aim">petto basso/tricipiti · zavorrate</span></span><span class="ex-sets">3×8–12</span><span class="ex-rest">2′</span></div>
-          <div class="exercise-row"><span class="ex-num">3</span><span class="ex-name">Croci ai cavi / pec deck<span class="ex-aim">petto · enfasi in allungamento</span></span><span class="ex-sets">3×12–15</span><span class="ex-rest">75″</span></div>
-          <div class="exercise-row"><span class="ex-num">4</span><span class="ex-name">Rematore manubrio / pulley<span class="ex-aim">dorso · spessore, 2° stimolo</span></span><span class="ex-sets">3×8–10</span><span class="ex-rest">90″</span></div>
-          <div class="exercise-row"><span class="ex-num">5</span><span class="ex-name">Alzate laterali<span class="ex-aim">deltoide laterale</span></span><span class="ex-sets">4×12–15</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">6</span><span class="ex-name">Face pull<span class="ex-aim">deltoide post. · salute spalla</span></span><span class="ex-sets">3×15–20</span><span class="ex-rest">45″</span></div>
-          <div class="exercise-row"><span class="ex-num">7</span><span class="ex-name">Curl manubri su inclinata<span class="ex-aim">bicipiti · stretch capo lungo</span></span><span class="ex-sets">3×10–12</span><span class="ex-rest">60″</span></div>
-        </div>
-      </div>
-
-      <div class="day-card lower">
-        <div class="day-header"><div class="day-top"><span class="day-title">Day 4 · Lower B</span><span class="day-tag">Stacco</span></div><div class="day-focus">Catena posteriore + volume quadricipiti</div></div>
-        <div class="ex-head"><span>#</span><span>Esercizio</span><span>Serie×Rip</span><span>Rec</span></div>
-        <div class="exercise-list">
-          <div class="exercise-row"><span class="ex-num">1</span><span class="ex-name">Stacco da terra<span class="ex-aim">il pesante torna · start 150 kg</span></span><span class="ex-sets">3×4–6</span><span class="ex-rest">3.5′</span></div>
-          <div class="exercise-row"><span class="ex-num">2</span><span class="ex-name">Pressa 45° / Hack squat<span class="ex-aim">quadricipiti · volume</span></span><span class="ex-sets">4×10–12</span><span class="ex-rest">90″</span></div>
-          <div class="exercise-row"><span class="ex-num">3</span><span class="ex-name">Hip thrust bilanciere<span class="ex-aim">glutei</span></span><span class="ex-sets">3×8–10</span><span class="ex-rest">2′</span></div>
-          <div class="exercise-row"><span class="ex-num">4</span><span class="ex-name">Leg curl sdraiato<span class="ex-aim">femorali · altro angolo</span></span><span class="ex-sets">3×10–12</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">5</span><span class="ex-name">Calf seduto<span class="ex-aim">soleo</span></span><span class="ex-sets">4×15</span><span class="ex-rest">45″</span></div>
-          <div class="exercise-row"><span class="ex-num">6</span><span class="ex-name">Plank zavorrato / ab-wheel<span class="ex-aim">core · anti-estensione</span></span><span class="ex-sets">3×max</span><span class="ex-rest">45″</span></div>
-        </div>
-      </div>
-
-      <div class="day-card arms">
-        <div class="day-header"><div class="day-top"><span class="day-title">Day 5 · Braccia + Spalle</span><span class="day-tag">Opzionale</span></div><div class="day-focus">Specializzazione estetica · bassa fatica</div></div>
-        <div class="ex-head"><span>#</span><span>Esercizio</span><span>Serie×Rip</span><span>Rec</span></div>
-        <div class="exercise-list">
-          <div class="exercise-row"><span class="ex-num">1</span><span class="ex-name">Alzate laterali<span class="ex-aim">deltoide laterale · larghezza</span></span><span class="ex-sets">4×12–15</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">2</span><span class="ex-name">Lento avanti manubri / Arnold press<span class="ex-aim">deltoide · press</span></span><span class="ex-sets">3×8–10</span><span class="ex-rest">90″</span></div>
-          <div class="exercise-row"><span class="ex-num">3</span><span class="ex-name">Alzate posteriori / Face pull<span class="ex-aim">deltoide posteriore · look 3D</span></span><span class="ex-sets">3×15–20</span><span class="ex-rest">45″</span></div>
-          <div class="exercise-row"><span class="ex-num">4</span><span class="ex-name">Curl bilanciere / manubri<span class="ex-aim">bicipiti</span></span><span class="ex-sets">3×8–12</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">5</span><span class="ex-name">Curl a martello<span class="ex-aim">brachiale · spessore braccio</span></span><span class="ex-sets">3×10–12</span><span class="ex-rest">45″</span></div>
-          <div class="exercise-row"><span class="ex-num">6</span><span class="ex-name">French press / Skull crusher<span class="ex-aim">tricipiti · capo lungo</span></span><span class="ex-sets">3×10–12</span><span class="ex-rest">60″</span></div>
-          <div class="exercise-row"><span class="ex-num">7</span><span class="ex-name">Push-down ai cavi<span class="ex-aim">tricipiti · capo laterale</span></span><span class="ex-sets">3×12–15</span><span class="ex-rest">45″</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.55;font-style:italic">Il <b style="color:var(--purple)">Day 5</b> resta opzionale: quando lo fai conta come giorno ON e lo incastri dove vuoi (anche dopo una seduta pesante, non tassa i grandi movimenti). Se lo salti, il programma sta in piedi da solo su 4 giorni: addome e face pull ora sono già dentro le sedute principali.</div>
-
-    <div class="section-title" style="margin-top:34px">Palestra piena? Piano B</div>
-    <div class="section-sub">200 persone e la postazione è occupata? Non aspettare e non saltare: sostituisci con un movimento dello stesso pattern. Stessi muscoli, stesso stimolo. I manubri sono il tuo jolly — ce ne sono sempre più copie e non si "prenotano".</div>
-    <div class="swap-grid">
-      <div class="swap-card"><div class="swap-title p">Panca occupata</div><div class="swap-list">
-        <div class="swap-item"><span>Panca manubri</span><span></span></div>
-        <div class="swap-item"><span>Chest press macchina</span><span></span></div>
-        <div class="swap-item"><span>Dip alle parallele</span><span></span></div></div></div>
-      <div class="swap-card"><div class="swap-title g">Rack squat occupato</div><div class="swap-list">
-        <div class="swap-item"><span>Hack squat</span><span></span></div>
-        <div class="swap-item"><span>Pressa 45°</span><span></span></div>
-        <div class="swap-item"><span>Goblet squat (manubrio)</span><span></span></div></div></div>
-      <div class="swap-card"><div class="swap-title" style="color:var(--green)">Zona stacco presa</div><div class="swap-list">
-        <div class="swap-item"><span>Stacco con manubri / trap bar</span><span></span></div>
-        <div class="swap-item"><span>Good morning</span><span></span></div>
-        <div class="swap-item"><span>Iperestensioni zavorrate</span><span></span></div></div></div>
-      <div class="swap-card"><div class="swap-title c">Lat / trazioni prese</div><div class="swap-list">
-        <div class="swap-item"><span>Pulldown a un braccio</span><span></span></div>
-        <div class="swap-item"><span>Rematore manubrio</span><span></span></div>
-        <div class="swap-item"><span>Pullover ai cavi</span><span></span></div></div></div>
-      <div class="swap-card"><div class="swap-title" style="color:var(--blue)">Spalle: nulla libero</div><div class="swap-list">
-        <div class="swap-item"><span>Arnold press (manubri)</span><span></span></div>
-        <div class="swap-item"><span>Lento ai cavi / macchina</span><span></span></div>
-        <div class="swap-item"><span>Alzate: cavi o manubri</span><span></span></div></div></div>
-      <div class="swap-card"><div class="swap-title" style="color:var(--purple)">Leg press / hack presa</div><div class="swap-list">
-        <div class="swap-item"><span>Affondi camminati manubri</span><span></span></div>
-        <div class="swap-item"><span>Bulgarian split squat</span><span></span></div>
-        <div class="swap-item"><span>Sissy squat / step-up</span><span></span></div></div></div>
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:12px;line-height:1.55;font-style:italic">Regola d'oro nei giorni di ressa: <b style="color:var(--text)">parti sempre dal fondamentale pesante</b> (panca/squat/stacco) appena trovi la postazione libera — è quello che non puoi rimandare. Gli accessori li incastri dove capita: per quelli la sostituzione costa zero.</div>
-
-    <div class="section-title" style="margin-top:34px">Carichi di partenza &amp; obiettivi di marzo</div>
-    <div class="section-sub">Start tarato sui carichi tenuti nel cut — le prime 2 settimane servono a riprendere il ritmo, poi si sale. Gli obiettivi di marzo sono realistici per 29 settimane in surplus al tuo livello: se la bilancia sale e questi numeri salgono con lei, i 7 kg saranno in gran parte muscolo.</div>
-    <div class="table-wrap">
-      <table class="summary-table">
-        <thead><tr><th>Esercizio</th><th>Schema</th><th style="color:var(--ice)">Start</th><th style="color:var(--green)">Obiettivo marzo</th><th>Note</th></tr></thead>
-        <tbody>
-          <tr><td>Panca piana</td><td class="m">4×5–6</td><td class="m" style="color:var(--ice)">100 kg</td><td class="m" style="color:var(--green)">112,5–115 ×5</td><td>+2,5 kg ogni volta che chiudi 4×6. Est. 1RM ~130 a fine blocco.</td></tr>
-          <tr><td>Squat</td><td class="m">4×5–6</td><td class="m" style="color:var(--ice)">120 kg</td><td class="m" style="color:var(--green)">140 ×5</td><td>+2,5–5 kg a progressione chiusa. Profondità prima del carico. Est. 1RM ~160.</td></tr>
-          <tr><td>Stacco da terra</td><td class="m">3×4–6</td><td class="m" style="color:var(--ice)">150 kg</td><td class="m" style="color:var(--green)">180 ×4</td><td>Il 75% del tuo 200: risali graduale, mai a cedimento. Territorio nuovo PR (205-210) in primavera.</td></tr>
-          <tr><td>Stacco rumeno (RDL)</td><td class="m">3×8</td><td class="m" style="color:var(--ice)">120 kg</td><td class="m" style="color:var(--green)">140 ×8</td><td>Allungamento sotto controllo: il carico segue la tecnica.</td></tr>
-          <tr><td>Lento avanti bilanciere</td><td class="m">4×6–8</td><td class="m" style="color:var(--ice)">47,5 kg</td><td class="m" style="color:var(--green)">57,5–60 ×6</td><td>Il press sale lento: usa i microcarichi da 1,25 se la palestra li ha.</td></tr>
-          <tr><td>Panca inclinata manubri</td><td class="m">3×8–10</td><td class="m" style="color:var(--ice)">32 kg/man.</td><td class="m" style="color:var(--green)">38–40 ×8</td><td>Scapole ferme, scendi profondo: lo stretch vale più del carico.</td></tr>
-          <tr><td>Rematore bilanciere</td><td class="m">4×6–8</td><td class="m" style="color:var(--ice)">70 kg</td><td class="m" style="color:var(--green)">85 ×6</td><td>Busto fermo: se serve lo slancio, il carico è troppo.</td></tr>
-          <tr><td>Accessori &amp; macchine</td><td class="m">—</td><td class="m" style="color:var(--muted)">RIR 1–2</td><td class="m" style="color:var(--muted)">doppia progressione</td><td>Chiudi il range in cima → +peso e riparti dal fondo.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="rules-grid" style="margin-top:14px">
-      <div class="rule-card"><span class="rule-icon">📈</span><span class="rule-text"><strong>Come progredire</strong>Doppia progressione: resta nel range, quando chiudi tutte le serie in cima a RIR 1-2 → +2,5 kg (alto corpo) o +5 kg (basso) e riparti dal fondo del range.</span></div>
-      <div class="rule-card"><span class="rule-icon">🎯</span><span class="rule-text"><strong>Obiettivo in bulk</strong>Qui i PR si inseguono. Il carico che sale è la prova che il surplus sta diventando muscolo e non grasso: se per 3 settimane sali di peso ma non di carichi, qualcosa va rivisto (sonno, recupero, tecnica).</span></div>
-      <div class="rule-card"><span class="rule-icon">🔥</span><span class="rule-text"><strong>Riscaldamento</strong>Sul 1° fondamentale: rampa in 3-4 serie leggere (bilanciere → 50% → 70% → 85%) prima delle serie allenanti. Sullo stacco aggiungi uno step a 90%. Non contano nel volume.</span></div>
-    </div>
-
-    <div class="section-title" style="margin-top:34px">Calendario settimanale</div>
-    <div class="section-sub">Due opzioni sui tuoi giorni reali. In entrambe le due Lower restano a 72h di distanza (squat e stacco tassano la stessa zona) e ogni coppia di giorni consecutivi è sempre Upper + Lower.</div>
-
-    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--blue);margin:18px 0 8px;text-transform:uppercase">Opzione A · Mar-Mer-Ven-Sab/Dom</div>
-    <div class="week-grid">
-      <div class="week-day"><div class="wd-name">Lun</div><div class="wd-tag wd-rest">Riposo</div><div class="wd-diet wd-off">OFF</div></div>
-      <div class="week-day"><div class="wd-name">Mar</div><div class="wd-tag wd-upper">Upper A</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Mer</div><div class="wd-tag wd-lower">Lower A</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Gio</div><div class="wd-tag wd-rest">Riposo<br>passi</div><div class="wd-diet wd-pizza">OFF 🍕</div></div>
-      <div class="week-day"><div class="wd-name">Ven</div><div class="wd-tag wd-upper">Upper B</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Sab</div><div class="wd-tag wd-lower">Lower B</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Dom</div><div class="wd-tag" style="color:var(--purple)">Day 5<br>opz.</div><div class="wd-diet" style="color:var(--muted)">OFF/ON</div></div>
-    </div>
-
-    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--blue);margin:22px 0 8px;text-transform:uppercase">Opzione B · Mar-Gio-Ven-Sab/Dom</div>
-    <div class="week-grid">
-      <div class="week-day"><div class="wd-name">Lun</div><div class="wd-tag wd-rest">Riposo</div><div class="wd-diet wd-off">OFF</div></div>
-      <div class="week-day"><div class="wd-name">Mar</div><div class="wd-tag wd-lower">Lower A</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Mer</div><div class="wd-tag wd-rest">Riposo<br>passi</div><div class="wd-diet wd-off">OFF</div></div>
-      <div class="week-day"><div class="wd-name">Gio</div><div class="wd-tag wd-upper">Upper A</div><div class="wd-diet wd-pizza">ON 🍕</div></div>
-      <div class="week-day"><div class="wd-name">Ven</div><div class="wd-tag wd-lower">Lower B</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Sab</div><div class="wd-tag wd-upper">Upper B</div><div class="wd-diet wd-on">ON</div></div>
-      <div class="week-day"><div class="wd-name">Dom</div><div class="wd-tag" style="color:var(--purple)">Day 5<br>opz.</div><div class="wd-diet" style="color:var(--muted)">OFF/ON</div></div>
-    </div>
-    <div style="font-size:11px;color:var(--muted);margin-top:10px;font-style:italic">Il 4° allenamento può cadere sabato o domenica: se scegli domenica, sposta lì l'ultima seduta. La pizza del giovedì resta dov'è — in Opzione A cade in un giorno di riposo (mangi OFF di giorno, la pizza sostituisce la cena), in Opzione B in un giorno ON (idem, sostituisce la cena ON). <b style="color:var(--purple)">Day 5 (braccia+spalle):</b> opzionale — quando lo fai, conta come giorno ON.</div>
-
-    <div class="section-title" style="margin-top:34px">Regole fondamentali</div>
-    <div class="rules-grid">
-      <div class="rule-card"><span class="rule-icon">📈</span><span class="rule-text"><strong>Progressione = priorità n°1</strong>In bulk i carichi devono salire, quasi ogni settimana sugli accessori, ogni 2-3 sui fondamentali. È il segnale che i kg in più sono muscolo. Segna tutto: quaderno o app, ma segna.</span></div>
-      <div class="rule-card"><span class="rule-icon">🎯</span><span class="rule-text"><strong>RIR 1–2, spingi il finale</strong>Fondamentali sempre a RIR 1-2. Sugli accessori l'ultima serie può arrivare a RIR 0-1: in surplus recuperi, sfruttalo.</span></div>
-      <div class="rule-card"><span class="rule-icon">⏱</span><span class="rule-text"><strong>72h tra le Lower</strong>Squat e stacco tassano la stessa zona lombare. In entrambe le opzioni le due Lower sono già distanziate: non invertirle.</span></div>
-      <div class="rule-card"><span class="rule-icon">🍚</span><span class="rule-text"><strong>Non saltare i pasti</strong>Il surplus si costruisce a tavola, pasto dopo pasto. Se ne salti uno, recupera i carbo a cena: la giornata deve chiudere sul target.</span></div>
-      <div class="rule-card"><span class="rule-icon">🚶</span><span class="rule-text"><strong>NEAT 7-8.000 passi</strong>Restano, per salute, appetito e sensibilità insulinica. Niente cardio aggressivo che rubi recupero: 1-2 camminate tranquille bastano.</span></div>
-      <div class="rule-card"><span class="rule-icon">🔄</span><span class="rule-text"><strong>Deload programmati</strong>Settimane 7 · 13 · 18 (Natale, cade perfetto) · 24: volume −40%, carichi al ~70%. In un blocco di 29 settimane i deload non sono pause: sono ciò che ti fa arrivare a marzo ancora in spinta.</span></div>
-      <div class="rule-card"><span class="rule-icon">😴</span><span class="rule-text"><strong>Sonno 7-8h</strong>La crescita avviene di notte: GH e sintesi proteica lavorano mentre dormi. Il surplus non compensa le nottate — in inverno vai a letto presto, tanto fuori fa freddo.</span></div>
-      <div class="rule-card"><span class="rule-icon">📅</span><span class="rule-text"><strong>Durata del blocco</strong>29 settimane, 24 agosto → metà marzo, stessa routine con deload programmati. A marzo si rivaluta su specchio, bilancia e carichi: mini-cut primaverile o mantenimento. La costanza batte la varietà, sempre.</span></div>
-    </div>
-  </div>
-
-  <!-- ===================== SUMMARY ===================== -->
-  <div id="summary" class="section">
-    <div class="section-title">Riepilogo macro giornalieri</div>
-    <div class="table-wrap">
-      <table class="summary-table">
-        <thead><tr><th>Pasto</th><th style="color:var(--yellow)">kcal ON</th><th style="color:var(--protein)">P</th><th style="color:var(--carbs)">C</th><th style="color:var(--fat)">G</th><th style="color:var(--orange)">kcal OFF</th></tr></thead>
-        <tbody>
-          <tr><td>🌅 Colazione</td><td class="m" style="color:var(--yellow)">725</td><td class="m" style="color:var(--protein)">45</td><td class="m" style="color:var(--carbs)">86</td><td class="m" style="color:var(--fat)">23</td><td class="m" style="color:var(--orange)">670</td></tr>
-          <tr><td>🥛 Spuntino AM</td><td class="m" style="color:var(--yellow)">565</td><td class="m" style="color:var(--protein)">31</td><td class="m" style="color:var(--carbs)">51</td><td class="m" style="color:var(--fat)">24</td><td class="m" style="color:var(--orange)">525</td></tr>
-          <tr><td>🍚 Pranzo</td><td class="m" style="color:var(--yellow)">730</td><td class="m" style="color:var(--protein)">40</td><td class="m" style="color:var(--carbs)">98</td><td class="m" style="color:var(--fat)">18</td><td class="m" style="color:var(--orange)">745</td></tr>
-          <tr><td>⚡ Pre-WO · 🥤 PM</td><td class="m" style="color:var(--yellow)">570</td><td class="m" style="color:var(--protein)">34</td><td class="m" style="color:var(--carbs)">97</td><td class="m" style="color:var(--fat)">5</td><td class="m" style="color:var(--orange)">350</td></tr>
-          <tr><td>🥩 Cena</td><td class="m" style="color:var(--yellow)">740</td><td class="m" style="color:var(--protein)">48</td><td class="m" style="color:var(--carbs)">83</td><td class="m" style="color:var(--fat)">23</td><td class="m" style="color:var(--orange)">790</td></tr>
-          <tr class="total-row"><td>TOTALE</td><td style="color:var(--yellow)">3.330</td><td style="color:var(--protein)">198g</td><td style="color:var(--carbs)">415g</td><td style="color:var(--fat)">93g</td><td style="color:var(--orange)">3.080</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="font-size:11px;color:var(--muted);margin-top:8px;font-style:italic">Le colonne P/C/G si riferiscono al giorno ON. Giorno OFF: P 214g · C 327g · G 102g (media tra colazione dolce e salata, che si equivalgono). Su 91,5 kg: proteine ~2,2 g/kg, grassi ~1,0-1,1 g/kg (24-30% delle kcal) — entrambi nei range ottimali per la massa. Media settimanale: 4 ON + 3 OFF ≈ 3.220 kcal.</div>
-
-    <div class="callout" style="background:rgba(74,222,128,.06);border-color:rgba(74,222,128,.22)">
-      <span class="ci">⚖️</span>
-      <div><h4 style="color:var(--green)">La leva — come regolare</h4>
-      <p>Pesati 3–4 mattine/sett a digiuno e guarda la <b>media settimanale</b>. Sali di 0,2–0,3 kg/sett → non toccare nulla. Fermo per 2 settimane → aggiungi ~150 kcal ai giorni ON con calorie dense, non volume (es. +10 g di olio a cena e +10 g di burro d'arachidi a colazione, oppure +250 ml di latte a metà mattina). Sali oltre 0,5 kg/sett dopo le prime 2 settimane → togli ~150 kcal dai giorni OFF. <b>Le proteine non si toccano mai.</b> Verso gennaio-febbraio il mantenimento sarà salito con te: è normale dover ritoccare in su 2-3 volte lungo il blocco.</p></div>
-    </div>
-
-    <div class="section-title">Note strategiche</div>
-    <div class="rules-grid">
-      <div class="rule-card"><span class="rule-icon">🔵</span><span class="rule-text"><strong>Carb cycling leggero</strong>Più carbo nei giorni ON attorno al workout (performance e glicogeno), meno nei giorni OFF con grassi su. Lo scarto è piccolo (~250 kcal): conta la media settimanale, e così i giorni ON restano mangiabili e i giorni OFF non scendono sotto il mantenimento.</span></div>
-      <div class="rule-card"><span class="rule-icon">🟢</span><span class="rule-text"><strong>Proteine ~2,2 g/kg</strong>~198-207 g distribuite su 5 pasti: sintesi proteica sempre accesa. In surplus servirebbe anche meno, ma così hai margine nei giorni imperfetti.</span></div>
-      <div class="rule-card"><span class="rule-icon">🫒</span><span class="rule-text"><strong>Grassi ~1 g/kg</strong>90-100 g al giorno, mai sotto i 70: ormoni, assorbimento vitamine, e sono le calorie più compatte che esistono (9 kcal/g). Salmone 2×/sett e noci quotidiane coprono gli omega-3.</span></div>
-      <div class="rule-card"><span class="rule-icon">⚖️</span><span class="rule-text"><strong>Surplus piccolo = bulk pulito</strong>La differenza tra massa pulita e "dirty bulk" è tutta qui: +200-300 kcal, non +1000. Oltre un certo ritmo il muscolo non cresce più veloce — cresce solo il grasso, e a primavera lo ripaghi con gli interessi.</span></div>
-      <div class="rule-card"><span class="rule-icon">🍚</span><span class="rule-text"><strong>Prime 2 settimane: bilancia bugiarda</strong>Passando da 2.400 a 3.200+ kcal, glicogeno e acqua ti daranno +1-1,5 kg quasi subito. Non è grasso e non è tutto muscolo: è il serbatoio che si riempie. Non tagliare e non esaltarti — la rotta si legge dalla settimana 3.</span></div>
-      <div class="rule-card"><span class="rule-icon">🍳</span><span class="rule-text"><strong>Batch cooking domenica</strong>Cuoci 1 kg di pollo + un pentolone di riso in una volta: 3-4 schiscette pronte. In bulk saltare un pasto per pigrizia è il vero nemico.</span></div>
-    </div>
-
-    <div class="section-title">Spesa settimanale · Lidl</div>
-    <div class="shop-grid">
-      <div class="shop-card"><div class="shop-cat"><b>Carne</b><span>~20 €</span></div><div class="shop-items">Petto di pollo 1,2 kg · macinato bovino 5% 0,7 kg · bresaola</div></div>
-      <div class="shop-card"><div class="shop-cat"><b>Pesce</b><span>~16 €</span></div><div class="shop-items">Tonno al naturale (multipack) · merluzzo surgelato · gamberi surgelati · salmone fresco 2 porzioni</div></div>
-      <div class="shop-card"><div class="shop-cat"><b>Uova &amp; latticini</b><span>~11 €</span></div><div class="shop-items">Uova (12) · latte parz. scremato 1 L · skyr / yogurt greco ×5 · fiocchi di latte light ×4</div></div>
-      <div class="shop-card"><div class="shop-cat"><b>Carbo</b><span>~10 €</span></div><div class="shop-items">Avena 1 kg · riso basmati 1 kg · pasta 0,5 kg · pane 1 kg · pan bauletto di grano duro 1 conf. · patate 2 kg · patate dolci 1,5 kg · gnocchi</div></div>
-      <div class="shop-card"><div class="shop-cat"><b>Frutta &amp; verdura</b><span>~8 €</span></div><div class="shop-items">Banane ×14 · verdure fresche + surgelate · avocado</div></div>
-      <div class="shop-card"><div class="shop-cat"><b>Dispensa</b><span>~5 €</span></div><div class="shop-items">Burro d'arachidi · miele · noci · marmellata · crackers ×2 · olio EVO</div></div>
-    </div>
-    <div class="budget-bar"><span style="color:var(--muted);font-size:12px">Totale stimato carrello</span><b>~68–75 € / settimana</b></div>
-    <div class="callout">
-      <span class="ci">💊</span>
-      <div><h4>Integratori — fuori dal budget settimanale</h4>
-      <p>Whey e creatina (6 g/die, sempre, mai ciclizzata) si comprano ~1 volta al mese e si ammortizzano. Unica aggiunta invernale sensata: la <b>vitamina D</b> — da ottobre a marzo il sole a Milano è un ricordo e quasi tutti ne sono carenti; sentila col medico o il farmacista alla prossima occasione. Tutto il resto (mass gainer, pre-workout esotici) è marketing: il surplus lo fai col carrello qui sopra.</p></div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">Winter Arc 26/27 · bulk pulito 91,5 → 100 · comanda la bilancia: media settimanale, non il singolo giorno</div>
+<nav class="tabbar" id="tabbar">
+  <button data-tab="piano"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/></svg>Piano</button>
+  <button data-tab="dieta"><svg viewBox="0 0 24 24"><path d="M7 3v8a2 2 0 0 1-2 2v0M7 3v8a2 2 0 0 0 2 2M5 3v5M9 3v5M7 13v8"/><path d="M17 21V3c-2.2 1-3.5 3.6-3.5 7v3h3.5"/></svg>Dieta</button>
+  <button data-tab="allenamento"><svg viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg>Allenamento</button>
+  <button data-tab="spesa"><svg viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 11h10.8l2.2-8H6.3"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg>Spesa</button>
+</nav>
 
 <script>
-  function switchTab(id,el){
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    el.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+/* ============================================================
+   DATI — modifica qui. Il layout sotto si aggiorna da solo.
+   Nei testi puoi usare <b>grassetto</b> e <i>testo grigio</i>.
+   ============================================================ */
+
+const BLOCK = {
+  start: '2026-08-24', weeks: 29, deloads: [7, 13, 18, 24],
+  route: [ // data, kg, etichetta
+    ['2026-08-24', 91.5, 'Ago'], ['2026-09-30', 93.5, 'Set'], ['2026-10-31', 94.5, 'Ott'],
+    ['2026-11-30', 96, 'Nov'], ['2026-12-25', 97, 'Dic'], ['2027-01-31', 98.5, 'Gen'],
+    ['2027-02-28', 99.5, 'Feb'], ['2027-03-15', 100, 'Mar'],
+  ],
+  stats: [['Start', '91,5'], ['Obiettivo', '100'], ['Altezza', '1,87'], ['Split', '4× U/L']],
+  energy: [
+    ['Mantenimento stimato', '~2.900 kcal'],
+    ['Surplus medio', '~310 kcal'],
+    ['Media settimanale', '~3.210 kcal'],
+    ['Crescita attesa', '+0,2–0,3 kg/sett'],
+  ],
+};
+
+const DAYS = {
+  on: {
+    label: 'Giorno ON', meta: 'Giorni di allenamento · carbo alti attorno al workout',
+    kcal: 3330, p: 198, c: 415, g: 93,
+    meals: [
+      { name: 'Colazione', when: 'porridge compatto', kcal: 725, p: 45, c: 86, g: 23,
+        foods: [['Avena', '60 g'], ['Skyr / yogurt greco 0%', '200 g'], ['Banana', '120 g'], ["Burro d'arachidi", '30 g'], ['Latte parz. scremato', '200 ml', 'da bere']],
+        prep: `<b>5 min</b> · Avena al microonde 90 sec, skyr fuori dal fuoco, banana e burro d'arachidi sopra; il latte lo bevi a parte. 60 g di avena invece di 100 perché il fiocco assorbe 3-4 volte il suo peso in acqua e ti gonfia. Niente miele: la banana basta a renderlo dolce.`,
+        tips: [['Ancora troppo pesante?', `Bevi il latte a metà mattina invece che a colazione: le calorie restano nella giornata, il piatto si alleggerisce.`]] },
+      { name: 'Spuntino', when: 'metà mattina', kcal: 565, p: 31, c: 51, g: 24,
+        foods: [['Fiocchi di latte light', '200 g'], ['Crackers', '45 g'], ['Marmellata', '20 g'], ['Noci', '20 g'], ['Caffè', '×2']],
+        prep: `<b>0 min</b> · Tutto portatile: crackers con la marmellata, le noci chiudono i grassi buoni. 45 g di crackers valgono i 70 g di pane, ma pesano meno sullo stomaco prima di pranzo.`,
+        tips: [['Niente fiocchi di latte?', `<p>Sostituisci i 200 g (~25 g proteine) con:</p><ul><li><b>Skyr / yogurt greco 200 g</b> <i>(il più simile)</i></li><li><b>Tonno 120 g</b>, <b>bresaola 70 g</b> o <b>prosciutto cotto ~120 g</b> <i>(rotazione, non fisso: più salato)</i></li><li><b>Shaker whey 30 g</b></li><li><b>Uova 3</b> <i>ok ma più grasse — vale anche per lo spuntino OFF.</i></li></ul>`]] },
+      { name: 'Pranzo', when: 'schiscetta', kcal: 730, p: 40, c: 98, g: 18,
+        foods: [['Riso basmati', '120 g', 'crudo'], ['Petto di pollo', '130 g', 'crudo'], ['Olio EVO', '15 g'], ['Verdure', '~100 g']],
+        prep: `<b>Prep la sera prima</b> · Un terzo di volume in meno rispetto a prima (da ~840 g a ~560 g nel piatto). Le calorie tolte qui sono passate al pre-WO e ai giorni OFF, dove entrano più facilmente. Verdure 100 g e basta: saziano senza dare calorie, nei giorni ON non ti servono a pranzo.`,
+        tips: [
+          ['Ancora non va giù?', `Dividilo: metà alle 12:30, metà verso le 15:30. Contano le calorie della giornata, non l'orario del pasto.`],
+          ['Salmone affumicato e gnocchi', `<b>Gnocchi 280 g + salmone affumicato 120 g + olio 10 g + verdure</b> <i>(~650 kcal · P41 · C84 · G15)</i>. Occasionale, non fisso: il salmone affumicato è molto salato (ritenzione → falso peso il giorno dopo). Giorno OFF: gnocchi 250 g + salmone 130 g.`],
+        ] },
+      { name: 'Pre-WO', when: 'pomeriggio · tutto portatile', kcal: 570, p: 34, c: 97, g: 5,
+        foods: [['Pan bauletto di grano duro', '100 g', '~4 fette'], ['Marmellata', '30 g'], ['Banana', '120 g'], ['Whey protein', '30 g', 'shaker con acqua'], ['Creatina', '6 g']],
+        prep: `<b>1 min</b> · Due toast di bauletto con la marmellata, la banana, e la whey nello shaker con acqua. Carbo rapidi e pochi grassi: si digerisce in fretta e arrivi alla seduta carico, non pieno. Mangialo 60-90 min prima.`,
+        tips: [['Senza banana?', `<p>Qui servono zuccheri rapidi (vale ~105 kcal):</p><ul><li><b>+40 g di marmellata</b> sul bauletto <i>(~100 kcal)</i></li><li>oppure <b>mela ~180 g</b> o <b>uva ~150 g</b> <i>(~95 kcal)</i></li></ul>`]] },
+      { name: 'Cena', when: 'post-workout · ~21:00', kcal: 740, p: 48, c: 83, g: 23,
+        foods: [['Pollo / merluzzo / gamberi', '160–200 g'], ['Patate oppure pane', '450 / 140 g'], ['Olio EVO', '20 g'], ['Verdure', '~150 g']],
+        prep: `<p><b>10 min</b> · Merluzzo e gamberi cuociono in 5 min, patate al microonde. Il pasto che ricarica il glicogeno per la seduta di domani.</p><p>Patate o pane si equivalgono (~80 g di carbo). Se la sera sei già pieno scegli il pane: occupa un terzo del volume delle patate.</p>`,
+        tips: [['Salmone fresco 2 sere a settimana', `Al posto del pollo: <b>salmone 180 g, niente olio aggiunto</b>, patate 450 g o pane 140 g <i>(~745 kcal · P47 · C83 · G24)</i>. Omega-3 e grassi buoni: in massa il salmone è un alleato, non un extra.`]] },
+    ],
+  },
+  off: {
+    label: 'Giorno OFF', meta: 'Giorni di riposo · si cresce anche da fermi',
+    kcal: 3080, p: 214, c: 327, g: 102,
+    meals: [
+      { name: 'Colazione', when: 'dolce o salata, scegli al mattino', kcal: 670, p: 38, c: 77, g: 24, approx: true,
+        variants: [
+          { name: 'Dolce', kcal: 660, p: 34, c: 78, g: 24,
+            foods: [['Skyr / yogurt greco 0%', '200 g'], ['Avena', '50 g'], ['Banana', '120 g'], ['Noci', '30 g'], ['Miele', '10 g']],
+            prep: `<b>2 min</b> · Bowl fredda: skyr in ciotola, avena cruda sopra, banana a rondelle, noci spezzate e un filo di miele. Diversa dal porridge dei giorni ON: niente fornelli, e le noci portano i grassi del giorno OFF.` },
+          { name: 'Salata', kcal: 680, p: 43, c: 76, g: 23,
+            foods: [['Uova', '3 (150 g)'], ['Pane', '70 g', '2 fette'], ['Avocado', '50 g'], ['Yogurt greco 0%', '150 g', 'a fine pasto'], ['Banana', '120 g', 'nello yogurt']],
+            prep: `<b>6 min</b> · Uova strapazzate e due fette di pane tostato con l'avocado schiacciato. Per chiudere, yogurt greco con la banana a rondelle. Il pane scende da 140 a 70 g: la banana recupera i carbo, lo yogurt aggiunge proteine senza appesantire il piatto.` },
+        ],
+        tips: [['Varianti', `<ul><li><b>Dolce:</b> avena → muesli senza zucchero 55 g o corn flakes 50 g · noci → mandorle 30 g · banana → mela 180 g o frutti di bosco 200 g</li><li><b>Salata:</b> yogurt greco → skyr 150 g · avocado → olio EVO 7 g sul pane · banana → frutti di bosco 200 g nello yogurt o spremuta d'arancia 250 ml</li><li><b>Veloce 0 min:</b> fiocchi di latte 250 g + crackers 50 g + noci 15 g + banana <i>(~655 kcal · P39)</i></li></ul>`]] },
+      { name: 'Spuntino', when: 'metà mattina', kcal: 525, p: 32, c: 36, g: 27,
+        foods: [['Fiocchi di latte light', '200 g'], ['Crackers', '40 g'], ['Noci', '25 g'], ['Caffè', '×2']],
+        prep: `<b>0 min</b> · Nei giorni di riposo i carbo scendono un po' e salgono i grassi: le noci in più portano i giorni OFF sopra il mantenimento. Qui si recupera, non si taglia.` },
+      { name: 'Pranzo', when: 'schiscetta', kcal: 745, p: 46, c: 83, g: 23,
+        foods: [['Pasta', '110 g', 'cruda'], ['Tonno al naturale', '130 g'], ['Olio EVO', '20 g'], ['Verdure', '≥150 g']],
+        prep: `<b>Prep la sera prima</b> · Insalata di pasta fredda: si prepara in anticipo, perfetta da ufficio. +30 g di pasta rispetto al cut.` },
+      { name: 'Spuntino', when: 'pomeriggio', kcal: 350, p: 41, c: 44, g: 2,
+        foods: [['Skyr', '200 g'], ['Whey protein', '25 g'], ['Banana', '120 g'], ['Miele', '10 g'], ['Creatina', '6 g']],
+        prep: `<b>1 min</b> · La creatina si prende anche nei giorni di riposo: conta la costanza, non l'orario. Mai ciclizzarla.`,
+        tips: [['Senza banana?', `<p>Vale ~105 kcal · 26 g carbo:</p><ul><li><b>Marmellata 40 g</b> oppure <b>miele a 45 g totali</b> (+35 g) direttamente nello skyr con la whey <i>(~108 kcal — viene fuori una crema dolce)</i></li><li>oppure <b>mela ~180 g</b> / <b>uva ~150 g</b> <i>(~95 kcal)</i></li></ul>`]] },
+      { name: 'Cena', when: 'sera', kcal: 790, p: 56, c: 87, g: 26,
+        foods: [['Macinato bovino 5%', '220 g'], ['Patate dolci oppure pane', '400 / 140 g'], ['Olio EVO', '15 g'], ['Verdure', '≥200 g']],
+        prep: `<p><b>8 min</b> · Macinato in padella, patate dolci a cubetti al microonde. La cena OFF più abbondante del cut: il muscolo si costruisce nel recupero.</p><p>Patate dolci o pane si equivalgono (~80 g di carbo, come la cena ON). Il pane occupa un terzo del volume: sceglilo se la sera sei già pieno.</p>` },
+    ],
+  },
+};
+
+const EAT_TIPS = `<p><b>Calorie dense, non volume:</b> olio, burro d'arachidi, noci, grana e latte aggiungono energia senza riempire il piatto.</p><p><b>Bevi tra un pasto e l'altro</b>, non durante: l'acqua a tavola occupa lo stomaco.</p><p><b>Verdure moderate nei giorni ON</b> e niente integrali a pranzo, perché fibre e volume sono ciò che ti blocca.</p><p><b>Il pasto non va giù?</b> Spezzalo in due a distanza di 2-3 ore. Nella giornata le calorie restano le stesse.</p>`;
+
+const BUILDER = {
+  intro: `Scegli 1 proteina + 1 carbo + 1 grasso + verdure. Le porzioni sono già equivalenti: ruoti a piacere e i conti restano in piedi. A pranzo riso o pasta (i più compatti), a cena patate o pane.`,
+  groups: [
+    { title: 'Proteine', head: 'pranzo / cena', items: [['Pollo', '130 / 160 g'], ['Merluzzo', '170 / 200 g'], ['Gamberi', '150 / 185 g'], ['Salmone fresco', '150 / 180 g'], ['Tonno naturale', '130 / 160 g'], ['Macinato 5%', '140 / 170 g'], ['Bresaola', '90 / 110 g'], ['Uova', '3+2 / 4+2 albumi']] },
+    { title: 'Carbo pranzo', head: 'ON / OFF', items: [['Riso basmati', '120 / 110 g'], ['Pasta', '120 / 110 g'], ['Pane', '160 / 150 g'], ['Patate', '500 / 460 g'], ['Patate dolci', '490 / 450 g'], ['Gnocchi', '280 / 260 g']] },
+    { title: 'Grassi', head: 'scegline 1', items: [['Olio EVO', '15 g'], ['Avocado', '85 g'], ['Noci / frutta secca', '20 g'], ["Burro d'arachidi", '22 g'], ['Verdure (libere)', '100–200 g']] },
+  ],
+  combos: ['Poke: riso + salmone + avocado', 'Pasta fredda + tonno', 'Burger bowl: macinato + patate', 'Gnocchi e salmone', 'Toast uova + avocado (SOS)'],
+};
+
+const PIZZA = `La pizza wurstel e patatine del giovedì resta, e in bulk smette di essere uno strappo: è surplus programmato. Mangia normale durante il giorno (ON o OFF secondo calendario, saltando la cena prevista) e la pizza chiude la giornata a ~3.400–3.600 kcal. Niente compensazioni prima, niente sensi di colpa dopo: un pasto libero a settimana tiene alta l'aderenza per 29 settimane, ed è l'aderenza che ti porta a 100.`;
+
+const WORKOUTS = [
+  { short: 'Upper A', title: 'Upper A', tag: 'Pesante', focus: 'Petto + Dorso · spinta e tirata orizzontale', ex: [
+    ['Panca piana bilanciere', 'petto · progressione · start 100 kg', '4×5–6', '3′'],
+    ['Rematore bilanciere', 'dorso · spessore · start 70 kg', '4×6–8', '2.5′'],
+    ['Panca inclinata manubri', 'petto alto · start 32 kg/man.', '3×8–10', '2′'],
+    ['Lat machine / Trazioni zavorrate', 'dorso · ampiezza', '3×8–10', '2′'],
+    ['Alzate laterali', 'spalle · larghezza (priorità estetica)', '4×12–15', '60″'],
+    ['Curl bilanciere EZ', 'bicipiti · diretto', '3×8–12', '60″'],
+    ['Push-down tricipiti', 'tricipiti · diretto', '3×10–12', '60″'],
+  ] },
+  { short: 'Lower A', title: 'Lower A', tag: 'Squat', focus: 'Quadricipiti · gamba pesante', ex: [
+    ['Squat bilanciere', 'forza gambe · start 120 kg', '4×5–6', '3′'],
+    ['Stacco rumeno (RDL)', 'femorali/glutei · start 120 kg', '3×8', '2.5′'],
+    ['Leg press', 'quadricipiti · volume', '4×10–12', '90″'],
+    ['Leg curl seduto', 'femorali', '3×12–15', '60″'],
+    ['Calf in piedi', 'polpacci · pausa 1″ in basso', '4×12–15', '45″'],
+    ['Crunch ai cavi', 'addome · zavorrato, progressivo', '3×12–15', '45″'],
+  ] },
+  { short: 'Upper B', title: 'Upper B', tag: 'Ipertrofia', focus: 'Spalle + Petto · volume e allungamento', ex: [
+    ['Lento avanti bilanciere', 'spalle · progressione · start 47,5 kg', '4×6–8', '2.5′'],
+    ['Dip alle parallele', 'petto basso/tricipiti · zavorrate', '3×8–12', '2′'],
+    ['Croci ai cavi / pec deck', 'petto · enfasi in allungamento', '3×12–15', '75″'],
+    ['Rematore manubrio / pulley', 'dorso · spessore, 2° stimolo', '3×8–10', '90″'],
+    ['Alzate laterali', 'deltoide laterale', '4×12–15', '60″'],
+    ['Face pull', 'deltoide post. · salute spalla', '3×15–20', '45″'],
+    ['Curl manubri su inclinata', 'bicipiti · stretch capo lungo', '3×10–12', '60″'],
+  ] },
+  { short: 'Lower B', title: 'Lower B', tag: 'Stacco', focus: 'Catena posteriore + volume quadricipiti', ex: [
+    ['Stacco da terra', 'il pesante torna · start 150 kg', '3×4–6', '3.5′'],
+    ['Pressa 45° / Hack squat', 'quadricipiti · volume', '4×10–12', '90″'],
+    ['Hip thrust bilanciere', 'glutei', '3×8–10', '2′'],
+    ['Leg curl sdraiato', 'femorali · altro angolo', '3×10–12', '60″'],
+    ['Calf seduto', 'soleo', '4×15', '45″'],
+    ['Plank zavorrato / ab-wheel', 'core · anti-estensione', '3×max', '45″'],
+  ] },
+  { short: 'Extra', title: 'Braccia + Spalle', tag: 'Opzionale', focus: 'Specializzazione estetica · bassa fatica',
+    note: `Quando lo fai conta come giorno ON e lo incastri dove vuoi (anche dopo una seduta pesante, non tassa i grandi movimenti). Se lo salti, il programma sta in piedi da solo su 4 giorni: addome e face pull sono già dentro le sedute principali.`, ex: [
+    ['Alzate laterali', 'deltoide laterale · larghezza', '4×12–15', '60″'],
+    ['Lento avanti manubri / Arnold press', 'deltoide · press', '3×8–10', '90″'],
+    ['Alzate posteriori / Face pull', 'deltoide posteriore · look 3D', '3×15–20', '45″'],
+    ['Curl bilanciere / manubri', 'bicipiti', '3×8–12', '60″'],
+    ['Curl a martello', 'brachiale · spessore braccio', '3×10–12', '45″'],
+    ['French press / Skull crusher', 'tricipiti · capo lungo', '3×10–12', '60″'],
+    ['Push-down ai cavi', 'tricipiti · capo laterale', '3×12–15', '45″'],
+  ] },
+];
+
+const PHILOSOPHY = `<p>Stesso scheletro che ha funzionato nel cut, ogni gruppo 2×/settimana (Schoenfeld 2016), ma filosofia ribaltata: <b>in surplus la progressione è l'obiettivo n°1</b>.</p><p>Serie dritte, RIR 1-2 sui fondamentali, ultime serie degli accessori spinte a RIR 0-1, eccentrica 2-3 sec. Volume su (~88 serie/sett): ora hai le calorie per recuperarlo.</p><p><b>Upper A</b> petto+dorso pesante · <b>Upper B</b> spalle+petto volume · <b>Lower A</b> squat · <b>Lower B</b> stacco. Addome e face pull sono nel programma, non opzionali.</p>`;
+
+const LIFTS = [ // esercizio, schema, start, obiettivo marzo, nota
+  ['Panca piana', '4×5–6', '100 kg', '112,5–115 ×5', '+2,5 kg ogni volta che chiudi 4×6. Est. 1RM ~130 a fine blocco.'],
+  ['Squat', '4×5–6', '120 kg', '140 ×5', '+2,5–5 kg a progressione chiusa. Profondità prima del carico. Est. 1RM ~160.'],
+  ['Stacco da terra', '3×4–6', '150 kg', '180 ×4', 'Il 75% del tuo 200: risali graduale, mai a cedimento. Territorio nuovo PR (205-210) in primavera.'],
+  ['Stacco rumeno (RDL)', '3×8', '120 kg', '140 ×8', 'Allungamento sotto controllo: il carico segue la tecnica.'],
+  ['Lento avanti bilanciere', '4×6–8', '47,5 kg', '57,5–60 ×6', 'Il press sale lento: usa i microcarichi da 1,25 se la palestra li ha.'],
+  ['Panca inclinata manubri', '3×8–10', '32 kg/man.', '38–40 ×8', 'Scapole ferme, scendi profondo: lo stretch vale più del carico.'],
+  ['Rematore bilanciere', '4×6–8', '70 kg', '85 ×6', 'Busto fermo: se serve lo slancio, il carico è troppo.'],
+  ['Accessori & macchine', 'RIR 1–2', '—', 'doppia progressione', 'Chiudi il range in cima → +peso e riparti dal fondo.'],
+];
+
+const PROGRESSION = [
+  ['Come progredire', `Doppia progressione: resta nel range, quando chiudi tutte le serie in cima a RIR 1-2 → +2,5 kg (alto corpo) o +5 kg (basso) e riparti dal fondo del range.`],
+  ['Obiettivo in bulk', `Qui i PR si inseguono. Il carico che sale è la prova che il surplus sta diventando muscolo e non grasso: se per 3 settimane sali di peso ma non di carichi, qualcosa va rivisto (sonno, recupero, tecnica).`],
+  ['Riscaldamento', `Sul 1° fondamentale: rampa in 3-4 serie leggere (bilanciere → 50% → 70% → 85%) prima delle serie allenanti. Sullo stacco aggiungi uno step a 90%. Non contano nel volume.`],
+];
+
+const PLAN_B = {
+  intro: `Postazione occupata? Non aspettare e non saltare: sostituisci con un movimento dello stesso pattern. I manubri sono il tuo jolly, ce ne sono sempre più copie.`,
+  items: [
+    ['Panca occupata', ['Panca manubri', 'Chest press macchina', 'Dip alle parallele']],
+    ['Rack squat occupato', ['Hack squat', 'Pressa 45°', 'Goblet squat (manubrio)']],
+    ['Zona stacco presa', ['Stacco con manubri / trap bar', 'Good morning', 'Iperestensioni zavorrate']],
+    ['Lat / trazioni prese', ['Pulldown a un braccio', 'Rematore manubrio', 'Pullover ai cavi']],
+    ['Spalle: nulla libero', ['Arnold press (manubri)', 'Lento ai cavi / macchina', 'Alzate: cavi o manubri']],
+    ['Leg press / hack presa', ['Affondi camminati manubri', 'Bulgarian split squat', 'Sissy squat / step-up']],
+  ],
+  rule: `<b>Parti sempre dal fondamentale pesante</b> (panca/squat/stacco) appena trovi la postazione libera: è quello che non puoi rimandare. Gli accessori li incastri dove capita.`,
+};
+
+const WEEK = {
+  intro: `In entrambe le opzioni le due Lower restano a 72h di distanza e ogni coppia di giorni consecutivi è Upper + Lower.`,
+  options: [
+    { name: 'Opzione A', days: [['Lun', 'Riposo', 'off'], ['Mar', 'Upper A', 'on'], ['Mer', 'Lower A', 'on'], ['Gio', 'Riposo · passi · pizza', 'off'], ['Ven', 'Upper B', 'on'], ['Sab', 'Lower B', 'on'], ['Dom', 'Extra (opzionale)', 'opt']] },
+    { name: 'Opzione B', days: [['Lun', 'Riposo', 'off'], ['Mar', 'Lower A', 'on'], ['Mer', 'Riposo · passi', 'off'], ['Gio', 'Upper A · pizza', 'on'], ['Ven', 'Lower B', 'on'], ['Sab', 'Upper B', 'on'], ['Dom', 'Extra (opzionale)', 'opt']] },
+  ],
+  note: `Il 4° allenamento può cadere sabato o domenica. La pizza del giovedì sostituisce la cena prevista (OFF in Opzione A, ON in Opzione B). L'Extra, quando lo fai, conta come giorno ON.`,
+};
+
+const RULES = [
+  ['Progressione = priorità n°1', `In bulk i carichi devono salire, quasi ogni settimana sugli accessori, ogni 2-3 sui fondamentali. È il segnale che i kg in più sono muscolo. Segna tutto: quaderno o app, ma segna.`],
+  ['RIR 1–2, spingi il finale', `Fondamentali sempre a RIR 1-2. Sugli accessori l'ultima serie può arrivare a RIR 0-1: in surplus recuperi, sfruttalo.`],
+  ['72h tra le Lower', `Squat e stacco tassano la stessa zona lombare. In entrambe le opzioni le due Lower sono già distanziate: non invertirle.`],
+  ['Non saltare i pasti', `Il surplus si costruisce a tavola, pasto dopo pasto. Se ne salti uno, recupera i carbo a cena: la giornata deve chiudere sul target.`],
+  ['NEAT 7-8.000 passi', `Restano, per salute, appetito e sensibilità insulinica. Niente cardio aggressivo che rubi recupero: 1-2 camminate tranquille bastano.`],
+  ['Deload programmati', `Settimane 7 · 13 · 18 (Natale, cade perfetto) · 24: volume −40%, carichi al ~70%. In un blocco di 29 settimane i deload non sono pause: sono ciò che ti fa arrivare a marzo ancora in spinta.`],
+  ['Sonno 7-8h', `La crescita avviene di notte: GH e sintesi proteica lavorano mentre dormi. Il surplus non compensa le nottate: in inverno vai a letto presto, tanto fuori fa freddo.`],
+  ['Durata del blocco', `29 settimane, 24 agosto → metà marzo, stessa routine con deload programmati. A marzo si rivaluta su specchio, bilancia e carichi: mini-cut primaverile o mantenimento. La costanza batte la varietà, sempre.`],
+];
+
+const LEVER = `Pesati 3–4 mattine/sett a digiuno e guarda la <b>media settimanale</b>. Sali di 0,2–0,3 kg/sett → non toccare nulla. Fermo per 2 settimane → aggiungi ~150 kcal ai giorni ON con calorie dense, non volume (es. +10 g di olio a cena e +10 g di burro d'arachidi a colazione, oppure +250 ml di latte a metà mattina). Sali oltre 0,5 kg/sett dopo le prime 2 settimane → togli ~150 kcal dai giorni OFF. <b>Le proteine non si toccano mai.</b> Verso gennaio-febbraio il mantenimento sarà salito con te: è normale dover ritoccare in su 2-3 volte lungo il blocco.`;
+
+const STRATEGY = [
+  ['Carb cycling leggero', `Più carbo nei giorni ON attorno al workout (performance e glicogeno), meno nei giorni OFF con grassi su. Lo scarto è piccolo (~250 kcal): conta la media settimanale, e così i giorni ON restano mangiabili e i giorni OFF non scendono sotto il mantenimento.`],
+  ['Proteine ~2,2 g/kg', `~198-207 g distribuite su 5 pasti: sintesi proteica sempre accesa. In surplus servirebbe anche meno, ma così hai margine nei giorni imperfetti.`],
+  ['Grassi ~1 g/kg', `90-100 g al giorno, mai sotto i 70: ormoni, assorbimento vitamine, e sono le calorie più compatte che esistono (9 kcal/g). Salmone 2×/sett e noci quotidiane coprono gli omega-3.`],
+  ['Surplus piccolo = bulk pulito', `La differenza tra massa pulita e "dirty bulk" è tutta qui: +200-300 kcal, non +1000. Oltre un certo ritmo il muscolo non cresce più veloce: cresce solo il grasso, e a primavera lo ripaghi con gli interessi.`],
+  ['Prime 2 settimane: bilancia bugiarda', `Passando da 2.400 a 3.200+ kcal, glicogeno e acqua ti daranno +1-1,5 kg quasi subito. Non è grasso e non è tutto muscolo: è il serbatoio che si riempie. Non tagliare e non esaltarti: la rotta si legge dalla settimana 3.`],
+  ['Batch cooking domenica', `Cuoci 1 kg di pollo + un pentolone di riso in una volta: 3-4 schiscette pronte. In bulk saltare un pasto per pigrizia è il vero nemico.`],
+];
+
+const SHOP = {
+  where: 'Lidl', total: '~68–75 € / settimana',
+  items: [
+    ['Carne', '~20 €', 'Petto di pollo 1,2 kg · macinato bovino 5% 0,7 kg · bresaola'],
+    ['Pesce', '~16 €', 'Tonno al naturale (multipack) · merluzzo surgelato · gamberi surgelati · salmone fresco 2 porzioni'],
+    ['Uova & latticini', '~11 €', 'Uova (12) · latte parz. scremato 1 L · skyr / yogurt greco ×5 · fiocchi di latte light ×4'],
+    ['Carbo', '~10 €', 'Avena 1 kg · riso basmati 1 kg · pasta 0,5 kg · pane 1 kg · pan bauletto di grano duro 1 conf. · patate 2 kg · patate dolci 1,5 kg · gnocchi'],
+    ['Frutta & verdura', '~8 €', 'Banane ×14 · verdure fresche + surgelate · avocado'],
+    ['Dispensa', '~5 €', "Burro d'arachidi · miele · noci · marmellata · crackers ×2 · olio EVO"],
+  ],
+  supplements: `Whey e creatina (6 g/die, sempre, mai ciclizzata) si comprano ~1 volta al mese e si ammortizzano. Unica aggiunta invernale sensata: la <b>vitamina D</b>. Da ottobre a marzo il sole a Milano è un ricordo e quasi tutti ne sono carenti; sentila col medico o il farmacista alla prossima occasione. Tutto il resto (mass gainer, pre-workout esotici) è marketing: il surplus lo fai col carrello qui sopra.`,
+};
+
+const MACRO_NOTE = `Su 91,5 kg: proteine ~2,2 g/kg, grassi ~1,0-1,1 g/kg (24-30% delle kcal), entrambi nei range ottimali per la massa. Colazione OFF: media tra dolce e salata, che si equivalgono. Media settimanale con 4 ON + 3 OFF ≈ 3.220 kcal.`;
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+const $ = s => document.querySelector(s);
+const fmt = (n, d = 0) => n.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: 'always' });
+const store = {
+  get(k, d) { try { return localStorage.getItem('wa.' + k) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('wa.' + k, v); } catch {} },
+};
+const toDate = s => new Date(s + 'T00:00:00');
+const daysBetween = (a, b) => Math.round((b - a) / 864e5); // arrotonda per l'ora legale
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+
+function seg(id, labels, active, cls = '') {
+  return `<div class="seg ${cls}" id="${id}" style="--n:${labels.length};--i:${active}">${labels.map((l, i) => `<button data-i="${i}" class="${i == active ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+}
+function bindSeg(id, onChange) {
+  const el = document.getElementById(id);
+  el.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    el.style.setProperty('--i', b.dataset.i);
+    el.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    onChange(+b.dataset.i);
+  });
+}
+const disclosure = (title, body, open = false) => `<details${open ? ' open' : ''}><summary>${title}</summary><div class="dbody">${body}</div></details>`;
+const foodRows = foods => foods.map(([n, q, note]) => `<div class="row food"><span class="n">${n}${note ? ` <small>· ${note}</small>` : ''}</span><span class="q">${q}</span></div>`).join('');
+
+/* ---------- Piano ---------- */
+function renderPiano() {
+  const start = toDate(BLOCK.start), now = new Date();
+  const day = daysBetween(start, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
+  const week = Math.min(BLOCK.weeks, Math.max(1, Math.floor(day / 7) + 1));
+  const done = day >= BLOCK.weeks * 7;
+
+  const pts = BLOCK.route.map(([d, kg, l]) => ({ t: daysBetween(start, toDate(d)), kg, l }));
+  const T = pts.at(-1).t, W = 320, H = 110, x = t => 6 + (t / T) * (W - 12), y = kg => 10 + (100 - kg) / (100 - 91) * (H - 34);
+  const t = Math.max(0, Math.min(T, day));
+  let i = pts.findIndex(p => p.t >= t); if (i <= 0) i = 1;
+  const a = pts[i - 1], b = pts[i], kgNow = a.kg + (b.kg - a.kg) * ((t - a.t) / (b.t - a.t || 1));
+  const line = pts.map(p => `${x(p.t).toFixed(1)},${y(p.kg).toFixed(1)}`).join(' ');
+  const past = pts.filter(p => p.t <= t).map(p => `${x(p.t).toFixed(1)},${y(p.kg).toFixed(1)}`).concat(`${x(t).toFixed(1)},${y(kgNow).toFixed(1)}`).join(' ');
+  const nextDeload = BLOCK.deloads.find(w => w >= week);
+  const deloadStart = nextDeload && addDays(start, (nextDeload - 1) * 7);
+  const isDeload = BLOCK.deloads.includes(week) && !done;
+
+  $('#v-piano').innerHTML = `
+    <div class="card">
+      <div class="pad">
+        <div class="kicker">${done ? 'Blocco concluso' : isDeload ? 'Settimana di deload' : 'Bulk pulito · 91,5 → 100 kg'}</div>
+        <div class="hero-top">
+          <div class="big">Sett. ${week}<small> / ${BLOCK.weeks}</small></div>
+          <div style="text-align:right"><div class="kicker" style="margin:0">rotta di oggi</div><div class="big" style="font-size:28px">~${fmt(kgNow, 1)}<small style="font-size:15px"> kg</small></div></div>
+        </div>
+        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Rotta del peso da 91,5 a 100 kg">
+          <line x1="6" x2="${W - 6}" y1="${y(100)}" y2="${y(100)}" stroke="var(--sep)" stroke-dasharray="3 4"/>
+          <polyline points="${line}" fill="none" stroke="var(--label3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="${past}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          ${pts.map(p => `<circle cx="${x(p.t)}" cy="${y(p.kg)}" r="2.5" fill="${p.t <= t ? 'var(--accent)' : 'var(--label3)'}"/>`).join('')}
+          <circle cx="${x(t)}" cy="${y(kgNow)}" r="6" fill="var(--accent)" stroke="var(--card)" stroke-width="2.5"/>
+          ${pts.map(p => `<text x="${x(p.t)}" y="${H - 4}" text-anchor="middle">${p.l}</text>`).join('')}
+          ${pts.filter((p, k) => k === 0 || k === pts.length - 1).map(p => `<text x="${x(p.t)}" y="${y(p.kg) - 9}" text-anchor="${p.t ? 'end' : 'start'}" style="fill:var(--label)">${fmt(p.kg, p.kg % 1 ? 1 : 0)}</text>`).join('')}
+        </svg>
+      </div>
+      <div class="chips">${BLOCK.stats.map(([l, v]) => `<div><span>${l}</span><b>${v}</b></div>`).join('')}</div>
+    </div>
+    ${nextDeload && !done ? `<div class="card"><div class="row"><span>${isDeload ? 'Deload in corso' : 'Prossimo deload'}<span class="sub">volume −40%, carichi al ~70%</span></span><span class="r">${isDeload ? `sett. ${week}` : `sett. ${nextDeload} · ${deloadStart.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })}`}</span></div></div>` : ''}
+
+    <h2>Energia</h2>
+    <div class="card">${BLOCK.energy.map(([l, v]) => `<div class="row"><span>${l}</span><span class="r mut">${v}</span></div>`).join('')}</div>
+    <div class="note"><h4>La leva: come regolare</h4>${LEVER}</div>
+
+    <h2>Settimana tipo</h2>
+    <div style="margin-bottom:10px">${seg('seg-week', WEEK.options.map(o => o.name), store.get('cal', 0))}</div>
+    <div class="card" id="week-list"></div>
+    <p class="foot">${WEEK.intro} ${WEEK.note}</p>
+
+    <h2>Regole fondamentali</h2>
+    <div class="card">${RULES.map(([t, b]) => disclosure(t, b)).join('')}</div>
+
+    <h2>Note strategiche</h2>
+    <div class="card">${STRATEGY.map(([t, b]) => disclosure(t, b)).join('')}</div>`;
+
+  const renderWeek = k => {
+    $('#week-list').innerHTML = WEEK.options[k].days.map(([d, w, s]) =>
+      `<div class="row wk ${s === 'off' ? 'rest' : ''}"><span class="d">${d}</span><span class="w">${w}</span><span class="pill ${s}">${s === 'opt' ? 'OFF/ON' : s.toUpperCase()}</span></div>`).join('');
+  };
+  renderWeek(+store.get('cal', 0));
+  bindSeg('seg-week', k => { store.set('cal', k); renderWeek(k); });
+}
+
+/* ---------- Dieta ---------- */
+function macroLine({ p, c, g }) {
+  const tot = p * 4 + c * 4 + g * 9;
+  return `<div class="mline"><span><span class="dot" style="background:var(--p)"></span><b>${p}</b> P</span><span><span class="dot" style="background:var(--c)"></span><b>${c}</b> C</span><span><span class="dot" style="background:var(--g)"></span><b>${g}</b> G</span>
+    <span class="split"><div style="width:${p * 4 / tot * 100}%;background:var(--p)"></div><div style="width:${c * 4 / tot * 100}%;background:var(--c)"></div><div style="width:${g * 9 / tot * 100}%;background:var(--g)"></div></span></div>`;
+}
+function mealCard(m, key) {
+  const approx = m.approx ? '~' : '';
+  let body;
+  if (m.variants) {
+    const vi = +store.get('bf', 0);
+    body = `<div class="inner-seg">${seg('seg-' + key, m.variants.map(v => v.name), vi, 'sm')}</div><div id="var-${key}"></div>`;
+  } else {
+    body = foodRows(m.foods) + disclosure('Preparazione', m.prep);
   }
-  function showDay(day){
-    var on=document.getElementById('meals-on'), off=document.getElementById('meals-off');
-    var bon=document.getElementById('btn-on'), boff=document.getElementById('btn-off');
-    if(day==='on'){on.style.display='grid';off.style.display='none';bon.classList.add('active-on');boff.classList.remove('active-off');}
-    else{on.style.display='none';off.style.display='grid';boff.classList.add('active-off');bon.classList.remove('active-on');}
-  }
+  const tips = (m.tips || []).map(([t, b]) => disclosure(t, b)).join('');
+  return `<div class="card">
+    <div class="meal-h"><div><h3>${m.name}</h3><div class="sub">${m.when}</div></div><div class="kcal">${approx}${fmt(m.kcal)}<small> kcal</small></div></div>
+    ${macroLine(m)}
+    ${body}${tips}
+  </div>`;
+}
+function renderVariant(m, key, vi) {
+  const v = m.variants[vi];
+  document.getElementById('var-' + key).innerHTML = `<div class="row" style="min-height:0;padding:2px 16px 6px"><span class="vmeta" style="margin:0;text-align:left">${v.name}: ${v.kcal} kcal · P${v.p} · C${v.c} · G${v.g}</span></div>` + foodRows(v.foods) + disclosure('Preparazione', v.prep);
+}
+function renderDieta() {
+  const k = +store.get('day', 0);
+  $('#v-dieta').innerHTML = `
+    <div class="sticky">${seg('seg-day', [DAYS.on.label, DAYS.off.label], k)}</div>
+    <div id="day-body"></div>
+
+    <h2>Costruisci il piatto</h2>
+    <p class="foot" style="margin:-4px 4px 10px">${BUILDER.intro}</p>
+    ${BUILDER.groups.map(g => `<div class="card"><div class="row"><b>${g.title}</b><span class="r mut" style="font-size:13px">${g.head}</span></div>${g.items.map(([n, q]) => `<div class="row food"><span>${n}</span><span class="q">${q}</span></div>`).join('')}</div>`).join('')}
+    <div class="card">${disclosure('Combo già pronte', `<ul>${BUILDER.combos.map(c => `<li>${c}</li>`).join('')}</ul>`)}</div>
+
+    <h2>Consigli</h2>
+    <div class="card">
+      ${disclosure('Mangiare tanto senza stare male', EAT_TIPS)}
+      ${disclosure('Giovedì: la pizza lavora per te', `<p>${PIZZA}</p>`)}
+    </div>`;
+
+  const renderDay = i => {
+    const key = i ? 'off' : 'on', d = DAYS[key];
+    const max = Math.max(d.p * 4, d.c * 4, d.g * 9);
+    $('#day-body').innerHTML = `
+      <div class="card pad tone-${key}">
+        <div class="kicker">${d.meta}</div>
+        <div class="day-sum">
+          <div class="big">${fmt(d.kcal)}<small> kcal</small></div>
+          <div class="macros">
+            ${[['P', d.p, 4, 'p'], ['C', d.c, 4, 'c'], ['G', d.g, 9, 'g']].map(([l, v, f, c]) => `<div class="mrow" style="--m:var(--${c})"><i>${l}</i><div class="track"><div style="width:${v * f / max * 100}%"></div></div><span>${v} g</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <h2>Pasti</h2>
+      ${d.meals.map((m, j) => mealCard(m, key + j)).join('')}`;
+    d.meals.forEach((m, j) => {
+      if (!m.variants) return;
+      const id = key + j;
+      renderVariant(m, id, +store.get('bf', 0));
+      bindSeg('seg-' + id, vi => { store.set('bf', vi); renderVariant(m, id, vi); });
+    });
+  };
+  renderDay(k);
+  bindSeg('seg-day', i => { store.set('day', i); renderDay(i); });
+}
+
+/* ---------- Allenamento ---------- */
+function renderAllenamento() {
+  const k = Math.min(WORKOUTS.length - 1, +store.get('wo', 0));
+  $('#v-allenamento').innerHTML = `
+    <div class="sticky">${seg('seg-wo', WORKOUTS.map(w => w.short), k, 'sm')}</div>
+    <div id="wo-body"></div>
+
+    <h2>Carichi · obiettivo marzo</h2>
+    <div class="card">${LIFTS.map(([n, s, a, b, note]) => `<details class="lift"><summary><span>${n}<span class="sub">${s}${a === '—' ? '' : ` · start ${a}`}</span></span><span class="r goal">${b}</span></summary><div class="dbody">${note}</div></details>`).join('')}</div>
+    <p class="foot">Start tarato sui carichi tenuti nel cut: le prime 2 settimane servono a riprendere il ritmo, poi si sale. Se la bilancia sale e questi numeri salgono con lei, i kg in più saranno in gran parte muscolo.</p>
+
+    <h2>Progressione</h2>
+    <div class="card">
+      ${PROGRESSION.map(([t, b]) => disclosure(t, b)).join('')}
+      ${disclosure('Filosofia del blocco', PHILOSOPHY)}
+    </div>
+
+    <h2>Palestra piena? Piano B</h2>
+    <p class="foot" style="margin:-4px 4px 10px">${PLAN_B.intro}</p>
+    <div class="card">${PLAN_B.items.map(([t, alts]) => disclosure(t, `<ul>${alts.map(a => `<li>${a}</li>`).join('')}</ul>`)).join('')}</div>
+    <p class="foot">${PLAN_B.rule}</p>`;
+
+  const renderWo = i => {
+    const w = WORKOUTS[i];
+    $('#wo-body').innerHTML = `<div class="card">
+      <div class="wo-h"><span class="tag">${w.tag}</span><h3>${w.title}</h3><p>${w.focus}</p></div>
+      ${w.ex.map(([n, aim, sets, rest], j) => `<div class="row ex"><span class="i">${j + 1}</span><span class="n">${n}<span class="sub">${aim}</span></span><span class="r"><b>${sets}</b><span>rec ${rest}</span></span></div>`).join('')}
+    </div>${w.note ? `<p class="foot">${w.note}</p>` : ''}`;
+  };
+  renderWo(k);
+  bindSeg('seg-wo', i => { store.set('wo', i); renderWo(i); });
+}
+
+/* ---------- Spesa ---------- */
+function renderSpesa() {
+  const rows = DAYS.on.meals.map((m, i) => {
+    const o = DAYS.off.meals[i];
+    const name = m.name === o.name ? (m.name === 'Spuntino' ? 'Spuntino AM' : m.name) : `${m.name} / Spuntino PM`;
+    return `<tr><td>${name}</td><td class="c-on">${fmt(m.kcal)}</td><td class="c-off">${fmt(o.kcal)}</td></tr>`;
+  }).join('');
+  const macro = d => `P ${d.p} · C ${d.c} · G ${d.g}`;
+  $('#v-spesa').innerHTML = `
+    <div class="card">
+      <div class="row"><span>Spesa settimanale<span class="sub">${SHOP.where}</span></span><span class="r" style="font-weight:600">${SHOP.total}</span></div>
+    </div>
+    <div class="card">${SHOP.items.map(([c, e, items]) => `<div class="row stack"><div style="display:flex;justify-content:space-between"><b>${c}</b><span class="mut num">${e}</span></div><p>${items}</p></div>`).join('')}</div>
+    <div class="note"><h4>Integratori, fuori budget</h4>${SHOP.supplements}</div>
+
+    <h2>Riepilogo kcal</h2>
+    <div class="card">
+      <table>
+        <thead><tr><th>Pasto</th><th class="c-on">ON</th><th class="c-off">OFF</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot><tr><td>Totale</td><td class="c-on">${fmt(DAYS.on.kcal)}</td><td class="c-off">${fmt(DAYS.off.kcal)}</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="card">
+      <div class="row"><span>Macro ON</span><span class="r mut">${macro(DAYS.on)}</span></div>
+      <div class="row"><span>Macro OFF</span><span class="r mut">${macro(DAYS.off)}</span></div>
+    </div>
+    <p class="foot">${MACRO_NOTE}</p>`;
+}
+
+/* ---------- Tab ---------- */
+const TITLES = { piano: 'Piano', dieta: 'Dieta', allenamento: 'Allenamento', spesa: 'Spesa' };
+function go(tab, scroll = true) {
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'v-' + tab));
+  document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  $('#title').textContent = TITLES[tab];
+  store.set('tab', tab);
+  if (scroll) window.scrollTo(0, 0);
+}
+$('#tabbar').addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(b.dataset.tab); });
+
+renderPiano(); renderDieta(); renderAllenamento(); renderSpesa();
+const saved = store.get('tab', 'piano');
+go(TITLES[saved] ? saved : 'piano', false);
 </script>
 </body>
 </html>

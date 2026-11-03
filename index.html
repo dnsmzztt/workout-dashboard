@@ -199,15 +199,16 @@ const BLOCK = {
   start: '2026-08-24', weeks: 29, deloads: [7, 13, 18, 24],
   route: [ // data, kg, etichetta
     ['2026-08-24', 91.5, 'Ago'], ['2026-09-30', 93.5, 'Set'], ['2026-10-31', 94.5, 'Ott'],
-    ['2026-11-30', 96, 'Nov'], ['2026-12-25', 97, 'Dic'], ['2027-01-31', 98.5, 'Gen'],
-    ['2027-02-28', 99.5, 'Feb'], ['2027-03-15', 100, 'Mar'],
+    ['2026-11-30', 95.3, 'Nov'], ['2026-12-25', 96, 'Dic'], ['2027-01-31', 96.8, 'Gen'],
+    ['2027-02-28', 97.5, 'Feb'], ['2027-03-15', 98, 'Mar'],
   ],
-  stats: [['Start', '91,5'], ['Obiettivo', '100'], ['Altezza', '1,87'], ['Split', '4× U/L']],
+  stats: [['Start', '91,5'], ['Marzo', '~98'], ['Altezza', '1,87'], ['Split', '4× U/L']],
   energy: [
-    ['Mantenimento stimato', '~2.900 kcal'],
-    ['Surplus medio', '~310 kcal'],
+    ['Mantenimento stimato (a ~94,5 kg)', '~3.000 kcal'],
+    ['Surplus medio', '~200 kcal'],
     ['Media settimanale', '~3.210 kcal'],
-    ['Crescita attesa', '+0,2–0,3 kg/sett'],
+    ['Crescita attesa', '+0,15–0,2 kg/sett'],
+    ['Dopo marzo', 'mini-cut 6–8 sett → ~95 kg definito'],
   ],
 };
 
@@ -217,24 +218,25 @@ const DAYS = {
     kcal: 3330, p: 198, c: 415, g: 93,
     meals: [
       { name: 'Colazione', when: 'porridge compatto', kcal: 725, p: 45, c: 86, g: 23,
-        foods: [['Avena', '60 g'], ['Skyr / yogurt greco 0%', '200 g'], ['Banana', '120 g'], ["Burro d'arachidi", '30 g'], ['Latte parz. scremato', '200 ml', 'da bere']],
+        foods: [['Avena', '60 g'], ['Skyr / yogurt greco 0%', '200 g', 'senza lattosio'], ['Banana soda', '120 g', 'punta verde'], ["Burro d'arachidi", '30 g'], ['Latte senza lattosio', '200 ml', 'da bere']],
         prep: `<b>5 min</b> · Avena al microonde 90 sec, skyr fuori dal fuoco, banana e burro d'arachidi sopra; il latte lo bevi a parte. 60 g di avena invece di 100 perché il fiocco assorbe 3-4 volte il suo peso in acqua e ti gonfia. Niente miele: la banana basta a renderlo dolce.`,
         tips: [['Ancora troppo pesante?', `Bevi il latte a metà mattina invece che a colazione: le calorie restano nella giornata, il piatto si alleggerisce.`]] },
       { name: 'Spuntino', when: 'metà mattina', kcal: 565, p: 31, c: 51, g: 24,
-        foods: [['Fiocchi di latte light', '200 g'], ['Crackers', '45 g'], ['Marmellata', '20 g'], ['Noci', '20 g'], ['Caffè', '×2']],
+        foods: [['Fiocchi di latte light', '200 g', 'senza lattosio'], ['Crackers / gallette di riso', '45 g'], ['Marmellata', '20 g'], ['Noci', '20 g'], ['Caffè', '×2']],
         prep: `<b>0 min</b> · Tutto portatile: crackers con la marmellata, le noci chiudono i grassi buoni. 45 g di crackers valgono i 70 g di pane, ma pesano meno sullo stomaco prima di pranzo.`,
         tips: [['Niente fiocchi di latte?', `<p>Sostituisci i 200 g (~25 g proteine) con:</p><ul><li><b>Skyr / yogurt greco 200 g</b> <i>(il più simile)</i></li><li><b>Tonno 120 g</b>, <b>bresaola 70 g</b> o <b>prosciutto cotto ~120 g</b> <i>(rotazione, non fisso: più salato)</i></li><li><b>Shaker whey 30 g</b></li><li><b>Uova 3</b> <i>ok ma più grasse — vale anche per lo spuntino OFF.</i></li></ul>`]] },
       { name: 'Pranzo', when: 'schiscetta', kcal: 730, p: 40, c: 98, g: 18,
-        foods: [['Riso basmati', '120 g', 'crudo'], ['Petto di pollo', '130 g', 'crudo'], ['Olio EVO', '15 g'], ['Verdure', '~100 g']],
+        foods: [['Riso basmati o cous cous', '120 g', 'crudo'], ['Petto di pollo', '130 g', 'crudo'], ['Olio EVO', '15 g'], ['Verdure', '~100 g']],
         prep: `<b>Prep la sera prima</b> · Un terzo di volume in meno rispetto a prima (da ~840 g a ~560 g nel piatto). Le calorie tolte qui sono passate al pre-WO e ai giorni OFF, dove entrano più facilmente. Verdure 100 g e basta: saziano senza dare calorie, nei giorni ON non ti servono a pranzo.`,
         tips: [
+          ['Cous cous al posto del riso', `Stesse calorie e stessi carbo, e si prepara in 5 minuti: <b>120 g di cous cous</b> coperti di acqua bollente salata, coperchio, poi sgrana con l'olio. Ottimo anche freddo in schiscetta. È grano: se durante il test anti-gonfiore la pancia peggiora, torna al riso per quelle 2 settimane.`],
           ['Ancora non va giù?', `Dividilo: metà alle 12:30, metà verso le 15:30. Contano le calorie della giornata, non l'orario del pasto.`],
           ['Salmone affumicato e gnocchi', `<b>Gnocchi 280 g + salmone affumicato 120 g + olio 10 g + verdure</b> <i>(~650 kcal · P41 · C84 · G15)</i>. Occasionale, non fisso: il salmone affumicato è molto salato (ritenzione → falso peso il giorno dopo). Giorno OFF: gnocchi 250 g + salmone 130 g.`],
         ] },
       { name: 'Pre-WO', when: 'pomeriggio · tutto portatile', kcal: 570, p: 34, c: 97, g: 5,
-        foods: [['Pan bauletto di grano duro', '100 g', '~4 fette'], ['Marmellata', '30 g'], ['Banana', '120 g'], ['Whey protein', '30 g', 'shaker con acqua'], ['Creatina', '6 g']],
+        foods: [['Pan bauletto di grano duro', '100 g', '~4 fette'], ['Marmellata', '30 g'], ['Banana soda', '120 g', 'punta verde'], ['Whey isolata', '30 g', 'shaker con acqua'], ['Creatina', '3 g', "+3 g a cena"]],
         prep: `<b>1 min</b> · Due toast di bauletto con la marmellata, la banana, e la whey nello shaker con acqua. Carbo rapidi e pochi grassi: si digerisce in fretta e arrivi alla seduta carico, non pieno. Mangialo 60-90 min prima.`,
-        tips: [['Senza banana?', `<p>Qui servono zuccheri rapidi (vale ~105 kcal):</p><ul><li><b>+40 g di marmellata</b> sul bauletto <i>(~100 kcal)</i></li><li>oppure <b>mela ~180 g</b> o <b>uva ~150 g</b> <i>(~95 kcal)</i></li></ul>`]] },
+        tips: [['Senza banana?', `<p>Qui servono zuccheri rapidi (vale ~105 kcal):</p><ul><li><b>+40 g di marmellata</b> sul bauletto <i>(~100 kcal)</i></li><li>oppure <b>uva ~150 g</b> o <b>2 kiwi</b> <i>(~95 kcal)</i></li><li>Gonfio col bauletto? <b>Gallette di riso 80 g</b> con la marmellata, stessi carbo.</li></ul>`]] },
       { name: 'Cena', when: 'post-workout · ~21:00', kcal: 740, p: 48, c: 83, g: 23,
         foods: [['Pollo / merluzzo / gamberi', '160–200 g'], ['Patate oppure pane', '450 / 140 g'], ['Olio EVO', '20 g'], ['Verdure', '~150 g']],
         prep: `<p><b>10 min</b> · Merluzzo e gamberi cuociono in 5 min, patate al microonde. Il pasto che ricarica il glicogeno per la seduta di domani.</p><p>Patate o pane si equivalgono (~80 g di carbo). Se la sera sei già pieno scegli il pane: occupa un terzo del volume delle patate.</p>`,
@@ -248,40 +250,40 @@ const DAYS = {
       { name: 'Colazione', when: 'dolce o salata, scegli al mattino', kcal: 670, p: 38, c: 77, g: 24, approx: true,
         variants: [
           { name: 'Dolce', kcal: 660, p: 34, c: 78, g: 24,
-            foods: [['Skyr / yogurt greco 0%', '200 g'], ['Avena', '50 g'], ['Banana', '120 g'], ['Noci', '30 g'], ['Miele', '10 g']],
-            prep: `<b>2 min</b> · Bowl fredda: skyr in ciotola, avena cruda sopra, banana a rondelle, noci spezzate e un filo di miele. Diversa dal porridge dei giorni ON: niente fornelli, e le noci portano i grassi del giorno OFF.` },
+            foods: [['Skyr / yogurt greco 0%', '200 g', 'senza lattosio'], ['Avena', '50 g'], ['Banana soda o 2 kiwi', '120 / 150 g'], ['Noci', '30 g'], ["Sciroppo d'acero", '10 g']],
+            prep: `<b>2 min</b> · Bowl fredda: skyr in ciotola, avena cruda sopra, banana a rondelle (o kiwi), noci spezzate e un filo di sciroppo d'acero. Diversa dal porridge dei giorni ON: niente fornelli, e le noci portano i grassi del giorno OFF.` },
           { name: 'Salata', kcal: 680, p: 43, c: 76, g: 23,
-            foods: [['Uova', '3 (150 g)'], ['Pane', '70 g', '2 fette'], ['Avocado', '50 g'], ['Yogurt greco 0%', '150 g', 'a fine pasto'], ['Banana', '120 g', 'nello yogurt']],
-            prep: `<b>6 min</b> · Uova strapazzate e due fette di pane tostato con l'avocado schiacciato. Per chiudere, yogurt greco con la banana a rondelle. Il pane scende da 140 a 70 g: la banana recupera i carbo, lo yogurt aggiunge proteine senza appesantire il piatto.` },
+            foods: [['Uova', '3 (150 g)'], ['Pane a lievitazione naturale', '70 g', '2 fette'], ['Avocado + olio EVO', '30 g + 3 g'], ['Yogurt greco 0%', '150 g', 'senza lattosio · a fine pasto'], ['Banana soda', '120 g', 'nello yogurt']],
+            prep: `<b>6 min</b> · Uova strapazzate e due fette di pane tostato con l'avocado schiacciato e un filo d'olio. Per chiudere, yogurt greco con la banana a rondelle. Il pane scende da 140 a 70 g: la banana recupera i carbo, lo yogurt aggiunge proteine senza appesantire il piatto.` },
         ],
-        tips: [['Varianti', `<ul><li><b>Dolce:</b> avena → muesli senza zucchero 55 g o corn flakes 50 g · noci → mandorle 30 g · banana → mela 180 g o frutti di bosco 200 g</li><li><b>Salata:</b> yogurt greco → skyr 150 g · avocado → olio EVO 7 g sul pane · banana → frutti di bosco 200 g nello yogurt o spremuta d'arancia 250 ml</li><li><b>Veloce 0 min:</b> fiocchi di latte 250 g + crackers 50 g + noci 15 g + banana <i>(~655 kcal · P39)</i></li></ul>`]] },
+        tips: [['Varianti', `<ul><li><b>Dolce:</b> avena → muesli senza zucchero 55 g o corn flakes 50 g · noci → mandorle 30 g · banana → 2 kiwi o frutti di bosco 200 g</li><li><b>Salata:</b> yogurt greco → skyr 150 g · avocado → olio EVO 7 g sul pane · banana → frutti di bosco 200 g nello yogurt o spremuta d'arancia 250 ml</li><li><b>Veloce 0 min:</b> fiocchi di latte senza lattosio 250 g + gallette di riso 50 g + noci 15 g + banana <i>(~655 kcal · P39)</i></li></ul>`]] },
       { name: 'Spuntino', when: 'metà mattina', kcal: 525, p: 32, c: 36, g: 27,
-        foods: [['Fiocchi di latte light', '200 g'], ['Crackers', '40 g'], ['Noci', '25 g'], ['Caffè', '×2']],
+        foods: [['Fiocchi di latte light', '200 g', 'senza lattosio'], ['Crackers / gallette di riso', '40 g'], ['Noci', '25 g'], ['Caffè', '×2']],
         prep: `<b>0 min</b> · Nei giorni di riposo i carbo scendono un po' e salgono i grassi: le noci in più portano i giorni OFF sopra il mantenimento. Qui si recupera, non si taglia.` },
       { name: 'Pranzo', when: 'schiscetta', kcal: 745, p: 46, c: 83, g: 23,
-        foods: [['Pasta', '110 g', 'cruda'], ['Tonno al naturale', '130 g'], ['Olio EVO', '20 g'], ['Verdure', '≥150 g']],
-        prep: `<b>Prep la sera prima</b> · Insalata di pasta fredda: si prepara in anticipo, perfetta da ufficio. +30 g di pasta rispetto al cut.` },
+        foods: [['Cous cous, riso o pasta', '110 g', 'crudo'], ['Tonno al naturale', '130 g'], ['Olio EVO', '20 g'], ['Verdure', '≥150 g']],
+        prep: `<b>Prep la sera prima</b> · Insalata fredda col tonno: il cous cous è il più rapido (5 min in acqua bollente, poi sgrani con l'olio) e da freddo resta perfetto. Si equivalgono tutti e tre: ruota come preferisci.` },
       { name: 'Spuntino', when: 'pomeriggio', kcal: 350, p: 41, c: 44, g: 2,
-        foods: [['Skyr', '200 g'], ['Whey protein', '25 g'], ['Banana', '120 g'], ['Miele', '10 g'], ['Creatina', '6 g']],
+        foods: [['Skyr', '200 g', 'senza lattosio'], ['Whey isolata', '25 g'], ['Banana soda', '120 g', 'punta verde'], ['Marmellata', '12 g'], ['Creatina', '3 g', '+3 g a cena']],
         prep: `<b>1 min</b> · La creatina si prende anche nei giorni di riposo: conta la costanza, non l'orario. Mai ciclizzarla.`,
-        tips: [['Senza banana?', `<p>Vale ~105 kcal · 26 g carbo:</p><ul><li><b>Marmellata 40 g</b> oppure <b>miele a 45 g totali</b> (+35 g) direttamente nello skyr con la whey <i>(~108 kcal — viene fuori una crema dolce)</i></li><li>oppure <b>mela ~180 g</b> / <b>uva ~150 g</b> <i>(~95 kcal)</i></li></ul>`]] },
+        tips: [['Senza banana?', `<p>Vale ~105 kcal · 26 g carbo:</p><ul><li><b>Marmellata a 50 g totali</b> (+38 g) direttamente nello skyr con la whey <i>(~100 kcal — viene fuori una crema dolce)</i></li><li>oppure <b>uva ~150 g</b> / <b>2 kiwi</b> <i>(~95 kcal)</i></li></ul>`]] },
       { name: 'Cena', when: 'sera', kcal: 790, p: 56, c: 87, g: 26,
-        foods: [['Macinato bovino 5%', '220 g'], ['Patate dolci oppure pane', '400 / 140 g'], ['Olio EVO', '15 g'], ['Verdure', '≥200 g']],
-        prep: `<p><b>8 min</b> · Macinato in padella, patate dolci a cubetti al microonde. La cena OFF più abbondante del cut: il muscolo si costruisce nel recupero.</p><p>Patate dolci o pane si equivalgono (~80 g di carbo, come la cena ON). Il pane occupa un terzo del volume: sceglilo se la sera sei già pieno.</p>` },
+        foods: [['Macinato bovino 5%', '220 g'], ['Patate oppure pane', '450 / 140 g'], ['Olio EVO', '15 g'], ['Verdure', '≥200 g']],
+        prep: `<p><b>8 min</b> · Macinato in padella, patate a cubetti al microonde. La cena OFF più abbondante del cut: il muscolo si costruisce nel recupero.</p><p>Patate al posto delle patate dolci: 400 g di patata dolce sono tanto mannitolo, uno degli zuccheri che più gonfiano. Le patate dolci restano ok una volta a settimana, non tutti i giorni. Patate o pane si equivalgono (~80 g di carbo, come la cena ON).</p>` },
     ],
   },
 };
 
-const EAT_TIPS = `<p><b>Calorie dense, non volume:</b> olio, burro d'arachidi, noci, grana e latte aggiungono energia senza riempire il piatto.</p><p><b>Bevi tra un pasto e l'altro</b>, non durante: l'acqua a tavola occupa lo stomaco.</p><p><b>Verdure moderate nei giorni ON</b> e niente integrali a pranzo, perché fibre e volume sono ciò che ti blocca.</p><p><b>Il pasto non va giù?</b> Spezzalo in due a distanza di 2-3 ore. Nella giornata le calorie restano le stesse.</p>`;
+const EAT_TIPS = `<p><b>Calorie dense, non volume:</b> olio, burro d'arachidi, noci, grana e latte aggiungono energia senza riempire il piatto.</p><p><b>Bevi tra un pasto e l'altro</b>, non durante: l'acqua a tavola occupa lo stomaco.</p><p><b>Verdure moderate nei giorni ON</b> e niente integrali a pranzo, perché fibre e volume sono ciò che ti blocca.</p><p><b>Il pasto non va giù?</b> Spezzalo in due a distanza di 2-3 ore. Nella giornata le calorie restano le stesse.</p><p><b>Pancia gonfia:</b> mangia lento, niente bibite gasate né gomme e barrette con polioli (sorbitolo, maltitolo, xilitolo). Se vai di corpo poco o a fatica, <b>2 kiwi verdi al giorno</b> al posto di una banana: sono la frutta con più prove contro la stitichezza.</p>`;
 
 const BUILDER = {
-  intro: `Scegli 1 proteina + 1 carbo + 1 grasso + verdure. Le porzioni sono già equivalenti: ruoti a piacere e i conti restano in piedi. A pranzo riso o pasta (i più compatti), a cena patate o pane.`,
+  intro: `Scegli 1 proteina + 1 carbo + 1 grasso + verdure. Le porzioni sono già equivalenti: ruoti a piacere e i conti restano in piedi. A pranzo riso, cous cous o pasta (i più compatti), a cena patate o pane.`,
   groups: [
     { title: 'Proteine', head: 'pranzo / cena', items: [['Pollo', '130 / 160 g'], ['Merluzzo', '170 / 200 g'], ['Gamberi', '150 / 185 g'], ['Salmone fresco', '150 / 180 g'], ['Tonno naturale', '130 / 160 g'], ['Macinato 5%', '140 / 170 g'], ['Bresaola', '90 / 110 g'], ['Uova', '3+2 / 4+2 albumi']] },
-    { title: 'Carbo pranzo', head: 'ON / OFF', items: [['Riso basmati', '120 / 110 g'], ['Pasta', '120 / 110 g'], ['Pane', '160 / 150 g'], ['Patate', '500 / 460 g'], ['Patate dolci', '490 / 450 g'], ['Gnocchi', '280 / 260 g']] },
-    { title: 'Grassi', head: 'scegline 1', items: [['Olio EVO', '15 g'], ['Avocado', '85 g'], ['Noci / frutta secca', '20 g'], ["Burro d'arachidi", '22 g'], ['Verdure (libere)', '100–200 g']] },
+    { title: 'Carbo pranzo', head: 'ON / OFF', items: [['Riso basmati', '120 / 110 g'], ['Cous cous', '120 / 110 g'], ['Pasta', '120 / 110 g'], ['Pane', '160 / 150 g'], ['Patate', '500 / 460 g'], ['Patate dolci (1×/sett)', '490 / 450 g'], ['Gnocchi', '280 / 260 g']] },
+    { title: 'Grassi', head: 'scegline 1', items: [['Olio EVO', '15 g'], ['Avocado', '30 g + olio 10 g'], ['Noci / frutta secca', '20 g'], ["Burro d'arachidi", '22 g'], ['Verdure (libere)', '100–200 g']] },
   ],
-  combos: ['Poke: riso + salmone + avocado', 'Pasta fredda + tonno', 'Burger bowl: macinato + patate', 'Gnocchi e salmone', 'Toast uova + avocado (SOS)'],
+  combos: ['Poke: riso + salmone + avocado', 'Cous cous freddo + tonno', 'Cous cous + pollo e verdure', 'Burger bowl: macinato + patate', 'Gnocchi e salmone', 'Toast uova + avocado (SOS)'],
 };
 
 const PIZZA = `La pizza wurstel e patatine del giovedì resta, e in bulk smette di essere uno strappo: è surplus programmato. Mangia normale durante il giorno (ON o OFF secondo calendario, saltando la cena prevista) e la pizza chiude la giornata a ~3.400–3.600 kcal. Niente compensazioni prima, niente sensi di colpa dopo: un pasto libero a settimana tiene alta l'aderenza per 29 settimane, ed è l'aderenza che ti porta a 100.`;
@@ -294,12 +296,13 @@ const WORKOUTS = [
     ['Lat machine / Trazioni zavorrate', 'dorso · ampiezza', '3×8–10', '2′'],
     ['Alzate laterali', 'spalle · larghezza (priorità estetica)', '4×12–15', '60″'],
     ['Curl bilanciere EZ', 'bicipiti · diretto', '3×8–12', '60″'],
-    ['Push-down tricipiti', 'tricipiti · diretto', '3×10–12', '60″'],
+    ['Estensioni sopra la testa ai cavi', 'tricipiti · capo lungo in allungamento', '3×10–12', '60″'],
   ] },
   { short: 'Lower A', title: 'Lower A', tag: 'Squat', focus: 'Quadricipiti · gamba pesante', ex: [
     ['Squat bilanciere', 'forza gambe · start 120 kg', '4×5–6', '3′'],
     ['Stacco rumeno (RDL)', 'femorali/glutei · start 120 kg', '3×8', '2.5′'],
     ['Leg press', 'quadricipiti · volume', '4×10–12', '90″'],
+    ['Leg extension', 'retto femorale · lo squat non lo copre', '3×12–15', '60″'],
     ['Leg curl seduto', 'femorali', '3×12–15', '60″'],
     ['Calf in piedi', 'polpacci · pausa 1″ in basso', '4×12–15', '45″'],
     ['Crunch ai cavi', 'addome · zavorrato, progressivo', '3×12–15', '45″'],
@@ -307,8 +310,9 @@ const WORKOUTS = [
   { short: 'Upper B', title: 'Upper B', tag: 'Ipertrofia', focus: 'Spalle + Petto · volume e allungamento', ex: [
     ['Lento avanti bilanciere', 'spalle · progressione · start 47,5 kg', '4×6–8', '2.5′'],
     ['Dip alle parallele', 'petto basso/tricipiti · zavorrate', '3×8–12', '2′'],
-    ['Croci ai cavi / pec deck', 'petto · enfasi in allungamento', '3×12–15', '75″'],
+    ['Croci ai cavi / pec deck', 'petto · enfasi in allungamento', '2×12–15', '75″'],
     ['Rematore manubrio / pulley', 'dorso · spessore, 2° stimolo', '3×8–10', '90″'],
+    ['Pulldown presa neutra', 'dorso · ampiezza, V-taper', '3×10–12', '75″'],
     ['Alzate laterali', 'deltoide laterale', '4×12–15', '60″'],
     ['Face pull', 'deltoide post. · salute spalla', '3×15–20', '45″'],
     ['Curl manubri su inclinata', 'bicipiti · stretch capo lungo', '3×10–12', '60″'],
@@ -333,7 +337,7 @@ const WORKOUTS = [
   ] },
 ];
 
-const PHILOSOPHY = `<p>Stesso scheletro che ha funzionato nel cut, ogni gruppo 2×/settimana (Schoenfeld 2016), ma filosofia ribaltata: <b>in surplus la progressione è l'obiettivo n°1</b>.</p><p>Serie dritte, RIR 1-2 sui fondamentali, ultime serie degli accessori spinte a RIR 0-1, eccentrica 2-3 sec. Volume su (~88 serie/sett): ora hai le calorie per recuperarlo.</p><p><b>Upper A</b> petto+dorso pesante · <b>Upper B</b> spalle+petto volume · <b>Lower A</b> squat · <b>Lower B</b> stacco. Addome e face pull sono nel programma, non opzionali.</p>`;
+const PHILOSOPHY = `<p>Stesso scheletro che ha funzionato nel cut, ogni gruppo 2×/settimana (Schoenfeld 2016), ma filosofia ribaltata: <b>in surplus la progressione è l'obiettivo n°1</b>.</p><p>Serie dritte, RIR 1-2 sui fondamentali, ultime serie degli accessori spinte a RIR 0-1, eccentrica 2-3 sec. Volume su (~93 serie/sett): ora hai le calorie per recuperarlo.</p><p><b>Upper A</b> petto+dorso pesante · <b>Upper B</b> spalle+petto volume · <b>Lower A</b> squat · <b>Lower B</b> stacco. Addome e face pull sono nel programma, non opzionali.</p><p>Ritocchi di novembre: <b>estensioni sopra la testa</b> al posto del push-down (il capo lungo cresce di più in allungamento), <b>leg extension</b> nella Lower A (squat e pressa fanno crescere poco il retto femorale), <b>pulldown</b> nella Upper B per avere due tirate verticali a settimana. È la larghezza che fa sembrare più grosso.</p>`;
 
 const LIFTS = [ // esercizio, schema, start, obiettivo marzo, nota
   ['Panca piana', '4×5–6', '100 kg', '112,5–115 ×5', '+2,5 kg ogni volta che chiudi 4×6. Est. 1RM ~130 a fine blocco.'],
@@ -382,15 +386,18 @@ const RULES = [
   ['NEAT 7-8.000 passi', `Restano, per salute, appetito e sensibilità insulinica. Niente cardio aggressivo che rubi recupero: 1-2 camminate tranquille bastano.`],
   ['Deload programmati', `Settimane 7 · 13 · 18 (Natale, cade perfetto) · 24: volume −40%, carichi al ~70%. In un blocco di 29 settimane i deload non sono pause: sono ciò che ti fa arrivare a marzo ancora in spinta.`],
   ['Sonno 7-8h', `La crescita avviene di notte: GH e sintesi proteica lavorano mentre dormi. Il surplus non compensa le nottate: in inverno vai a letto presto, tanto fuori fa freddo.`],
-  ['Durata del blocco', `29 settimane, 24 agosto → metà marzo, stessa routine con deload programmati. A marzo si rivaluta su specchio, bilancia e carichi: mini-cut primaverile o mantenimento. La costanza batte la varietà, sempre.`],
+  ['Stomach vacuum ogni mattina', `4-5 tenute da 20-30 sec, a digiuno: butti fuori tutta l'aria e risucchi l'ombelico verso la colonna. Allena il trasverso, il muscolo che tiene la pancia "dentro" a riposo. Non brucia grasso, ma cambia come porti l'addome.`],
+  ['Durata del blocco', `29 settimane, 24 agosto → metà marzo, stessa routine con deload programmati. Si arriva intorno ai 98 kg, poi <b>mini-cut di 6-8 settimane</b> (−0,5/0,7% del peso a settimana) fino a ~95 kg definito: stesso peso di oggi ma con ~2 kg di muscolo in più. I 100 kg puliti sono il traguardo del bulk successivo. La costanza batte la varietà, sempre.`],
 ];
 
-const LEVER = `Pesati 3–4 mattine/sett a digiuno e guarda la <b>media settimanale</b>. Sali di 0,2–0,3 kg/sett → non toccare nulla. Fermo per 2 settimane → aggiungi ~150 kcal ai giorni ON con calorie dense, non volume (es. +10 g di olio a cena e +10 g di burro d'arachidi a colazione, oppure +250 ml di latte a metà mattina). Sali oltre 0,5 kg/sett dopo le prime 2 settimane → togli ~150 kcal dai giorni OFF. <b>Le proteine non si toccano mai.</b> Verso gennaio-febbraio il mantenimento sarà salito con te: è normale dover ritoccare in su 2-3 volte lungo il blocco.`;
+const LEVER = `Pesati 3–4 mattine/sett a digiuno e guarda la <b>media settimanale</b>. Sali di 0,15–0,2 kg/sett → non toccare nulla. Fermo per 2 settimane → aggiungi ~150 kcal ai giorni ON con calorie dense, non volume (es. +10 g di olio a cena e +10 g di burro d'arachidi a colazione, oppure +250 ml di latte a metà mattina). Sali oltre 0,3 kg/sett → togli ~150 kcal dai giorni OFF. <b>Misura la vita all'ombelico ogni lunedì</b>: se cresce più di ~0,5 cm per ogni kg preso, togli 150 kcal anche se la bilancia è in rotta. <b>Le proteine non si toccano mai.</b> Verso gennaio-febbraio il mantenimento sarà salito con te: è normale dover ritoccare in su 2-3 volte lungo il blocco.`;
 
 const STRATEGY = [
   ['Carb cycling leggero', `Più carbo nei giorni ON attorno al workout (performance e glicogeno), meno nei giorni OFF con grassi su. Lo scarto è piccolo (~250 kcal): conta la media settimanale, e così i giorni ON restano mangiabili e i giorni OFF non scendono sotto il mantenimento.`],
   ['Proteine ~2,2 g/kg', `~198-207 g distribuite su 5 pasti: sintesi proteica sempre accesa. In surplus servirebbe anche meno, ma così hai margine nei giorni imperfetti.`],
   ['Grassi ~1 g/kg', `90-100 g al giorno, mai sotto i 70: ormoni, assorbimento vitamine, e sono le calorie più compatte che esistono (9 kcal/g). Salmone 2×/sett e noci quotidiane coprono gli omega-3.`],
+  ['Test anti-gonfiore: 2 settimane', `Stessi cibi, versioni più tollerabili: latticini e latte <b>senza lattosio</b>, whey <b>isolata</b>, banana <b>soda</b> (quella matura è carica di fruttani), patate al posto delle patate dolci, sciroppo d'acero o marmellata al posto del miele, avocado ridotto. Dopo 2 settimane reintroduci un gruppo alla volta (prima il lattosio) e vedi cosa ti gonfia. <b>Prima di togliere il glutine</b> fai l'esame della celiachia (tTG-IgA) col medico: senza glutine il test non è più attendibile.`],
+  ['Obiettivo: più grosso, non solo più pesante', `A 1,87 m sembri più grosso a ~95-97 kg al 12-13% che a 100 kg al 17%. Il numero che conta è la massa magra: si costruisce piano (da natural, al tuo livello, 1,5-2 kg di muscolo a stagione), e il resto del peso in più è grasso che poi va tolto. Bilancia, specchio e metro valgono insieme.`],
   ['Surplus piccolo = bulk pulito', `La differenza tra massa pulita e "dirty bulk" è tutta qui: +200-300 kcal, non +1000. Oltre un certo ritmo il muscolo non cresce più veloce: cresce solo il grasso, e a primavera lo ripaghi con gli interessi.`],
   ['Prime 2 settimane: bilancia bugiarda', `Passando da 2.400 a 3.200+ kcal, glicogeno e acqua ti daranno +1-1,5 kg quasi subito. Non è grasso e non è tutto muscolo: è il serbatoio che si riempie. Non tagliare e non esaltarti: la rotta si legge dalla settimana 3.`],
   ['Batch cooking domenica', `Cuoci 1 kg di pollo + un pentolone di riso in una volta: 3-4 schiscette pronte. In bulk saltare un pasto per pigrizia è il vero nemico.`],
@@ -401,15 +408,15 @@ const SHOP = {
   items: [
     ['Carne', '~20 €', 'Petto di pollo 1,2 kg · macinato bovino 5% 0,7 kg · bresaola'],
     ['Pesce', '~16 €', 'Tonno al naturale (multipack) · merluzzo surgelato · gamberi surgelati · salmone fresco 2 porzioni'],
-    ['Uova & latticini', '~11 €', 'Uova (12) · latte parz. scremato 1 L · skyr / yogurt greco ×5 · fiocchi di latte light ×4'],
-    ['Carbo', '~10 €', 'Avena 1 kg · riso basmati 1 kg · pasta 0,5 kg · pane 1 kg · pan bauletto di grano duro 1 conf. · patate 2 kg · patate dolci 1,5 kg · gnocchi'],
-    ['Frutta & verdura', '~8 €', 'Banane ×14 · verdure fresche + surgelate · avocado'],
-    ['Dispensa', '~5 €', "Burro d'arachidi · miele · noci · marmellata · crackers ×2 · olio EVO"],
+    ['Uova & latticini', '~11 €', 'Uova (12) · latte senza lattosio 1 L · skyr / yogurt greco senza lattosio ×5 · fiocchi di latte senza lattosio ×4'],
+    ['Carbo', '~10 €', 'Avena 1 kg · riso basmati 1 kg · cous cous 0,5 kg · pasta 0,5 kg · pane a lievitazione naturale 1 kg · pan bauletto di grano duro 1 conf. · patate 3,5 kg · gnocchi'],
+    ['Frutta & verdura', '~8 €', 'Banane sode ×12 · kiwi ×6 · verdure fresche + surgelate · avocado'],
+    ['Dispensa', '~5 €', "Burro d'arachidi · sciroppo d'acero · noci · marmellata · crackers / gallette di riso ×2 · olio EVO"],
   ],
-  supplements: `Whey e creatina (6 g/die, sempre, mai ciclizzata) si comprano ~1 volta al mese e si ammortizzano. Unica aggiunta invernale sensata: la <b>vitamina D</b>. Da ottobre a marzo il sole a Milano è un ricordo e quasi tutti ne sono carenti; sentila col medico o il farmacista alla prossima occasione. Tutto il resto (mass gainer, pre-workout esotici) è marketing: il surplus lo fai col carrello qui sopra.`,
+  supplements: `Whey <b>isolata</b> (la concentrata contiene lattosio) e creatina (6 g/die in 2 dosi da 3 g ai pasti, sempre, mai ciclizzata) si comprano ~1 volta al mese e si ammortizzano. Unica aggiunta invernale sensata: la <b>vitamina D</b>. Da ottobre a marzo il sole a Milano è un ricordo e quasi tutti ne sono carenti; sentila col medico o il farmacista alla prossima occasione. Tutto il resto (mass gainer, pre-workout esotici) è marketing: il surplus lo fai col carrello qui sopra.`,
 };
 
-const MACRO_NOTE = `Su 91,5 kg: proteine ~2,2 g/kg, grassi ~1,0-1,1 g/kg (24-30% delle kcal), entrambi nei range ottimali per la massa. Colazione OFF: media tra dolce e salata, che si equivalgono. Media settimanale con 4 ON + 3 OFF ≈ 3.220 kcal.`;
+const MACRO_NOTE = `Su 91,5–95 kg: proteine ~2,2 g/kg, grassi ~1,0-1,1 g/kg (24-30% delle kcal), entrambi nei range ottimali per la massa. Colazione OFF: media tra dolce e salata, che si equivalgono. Media settimanale con 4 ON + 3 OFF ≈ 3.220 kcal.`;
 
 /* ============================================================
    LAYOUT
@@ -448,7 +455,7 @@ function renderPiano() {
   const done = day >= BLOCK.weeks * 7;
 
   const pts = BLOCK.route.map(([d, kg, l]) => ({ t: daysBetween(start, toDate(d)), kg, l }));
-  const T = pts.at(-1).t, W = 320, H = 110, x = t => 6 + (t / T) * (W - 12), y = kg => 10 + (100 - kg) / (100 - 91) * (H - 34);
+  const goal = pts.at(-1).kg, T = pts.at(-1).t, W = 320, H = 110, x = t => 6 + (t / T) * (W - 12), y = kg => 10 + (100 - kg) / (100 - 91) * (H - 34);
   const t = Math.max(0, Math.min(T, day));
   let i = pts.findIndex(p => p.t >= t); if (i <= 0) i = 1;
   const a = pts[i - 1], b = pts[i], kgNow = a.kg + (b.kg - a.kg) * ((t - a.t) / (b.t - a.t || 1));
@@ -461,13 +468,13 @@ function renderPiano() {
   $('#v-piano').innerHTML = `
     <div class="card">
       <div class="pad">
-        <div class="kicker">${done ? 'Blocco concluso' : isDeload ? 'Settimana di deload' : 'Bulk pulito · 91,5 → 100 kg'}</div>
+        <div class="kicker">${done ? 'Blocco concluso' : isDeload ? 'Settimana di deload' : `Bulk pulito · 91,5 → ${fmt(goal)} kg`}</div>
         <div class="hero-top">
           <div class="big">Sett. ${week}<small> / ${BLOCK.weeks}</small></div>
           <div style="text-align:right"><div class="kicker" style="margin:0">rotta di oggi</div><div class="big" style="font-size:28px">~${fmt(kgNow, 1)}<small style="font-size:15px"> kg</small></div></div>
         </div>
-        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Rotta del peso da 91,5 a 100 kg">
-          <line x1="6" x2="${W - 6}" y1="${y(100)}" y2="${y(100)}" stroke="var(--sep)" stroke-dasharray="3 4"/>
+        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Rotta del peso da 91,5 a ${fmt(goal)} kg">
+          <line x1="6" x2="${W - 6}" y1="${y(goal)}" y2="${y(goal)}" stroke="var(--sep)" stroke-dasharray="3 4"/>
           <polyline points="${line}" fill="none" stroke="var(--label3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <polyline points="${past}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           ${pts.map(p => `<circle cx="${x(p.t)}" cy="${y(p.kg)}" r="2.5" fill="${p.t <= t ? 'var(--accent)' : 'var(--label3)'}"/>`).join('')}
